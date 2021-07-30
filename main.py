@@ -11,7 +11,6 @@ app.config['SECRET_KEY'] = '766ad3b9779f8e26642e74331dbf694c'
 @app.route("/")
 def home():
     return render_template("home.html")
-  
 
 
 @app.route("/register", methods=['GET', 'POST'])
@@ -27,12 +26,12 @@ def register_page():
             try:
                 user = sign_up_user(email, password, name, college)
                 return render_template("home.html")
-            except:
+            except BaseException:
                 unsuccessful_register = "Something went wrong"
-                return render_template("register.html", unsuccessful=unsuccessful)
+                return render_template(
+                    "register.html", unsuccessful=unsuccessful)
         return render_template("register.html", unsuccessful=unsuccessful)
     return render_template("register.html")
-   
 
 
 @app.route("/login", methods=['GET', 'POST'])
@@ -44,24 +43,37 @@ def login():
         try:
             user = sign_in_user(email, password)
             return render_template("home.html")
-        except:
+        except BaseException:
             return render_template("login.html", unsuccessful=unsuccessful)
-    
+
     return render_template("login.html")
 
 
-@app.route("/searchtest", methods=['GET','POST'])
+@app.route("/searchtest", methods=['GET', 'POST'])
 def searchAPI():
     if request.method == "POST":
         print(request.form)
-        search = get_bookPrices(request.form.get('Bookname'),get_bookPrices_json(request.form.get('ISBN')))
+        search = get_bookPrices(
+            request.form.get('Bookname'),
+            get_bookPrices_json(
+                request.form.get('ISBN')))
         ima = get_bookImage(request.form.get('ISBN'))
         if ima == "Error no images for the book.":
-            return render_template("search.html", text=search[0], image=ima,test="none",text2=ima,url=search[1])
+            return render_template(
+                "search.html",
+                text=search[0],
+                image=ima,
+                test="none",
+                text2=ima,
+                url=search[1])
         print(ima)
-        return render_template("search.html", text=search[0], image=ima,test="block",url=search[1])
-    return render_template("search.html",test="none")
-
+        return render_template(
+            "search.html",
+            text=search[0],
+            image=ima,
+            test="block",
+            url=search[1])
+    return render_template("search.html", test="none")
 
 
 if __name__ == '__main__':

@@ -37,7 +37,7 @@ def get_bookPrices_json(isbn):
 
 def get_bookPrices(bookname, json):
     if not isinstance(json, dict):
-        return ["Error","Error"]
+        return ["Error", "Error"]
     d = json
     if d != "Error":
         temp = ""
@@ -50,28 +50,28 @@ def get_bookPrices(bookname, json):
                    str(d['price_used']) + \
                    ". The new price is $" + str(d['price_new'])
             url = "For the used textbook go to : " + \
-                   d['url_used'] + "\n" + \
-                   "For the new textbook go to : " + \
-                   d['url_new']
+                d['url_used'] + "\n" + \
+                "For the new textbook go to : " + \
+                d['url_new']
         elif price_used and not price_new:
             temp = "For the book, " + bookname + \
                 ", there is only new textbooks in Booksrun. " + \
                 "They cost $" + str(d['price_new']) + "."
-            url =  "For the new textbook go to : " + \
-                   d['url_new']
+            url = "For the new textbook go to : " + \
+                d['url_new']
         elif price_new and not price_used:
             temp = "For the book, " + bookname + \
                 ", there is only used textbooks in Booksrun. " + \
                 "They cost $" + str(d['price_used']) + "."
-            url =  "For the used textbook go to : " + \
-                   d['url_used']
+            url = "For the used textbook go to : " + \
+                d['url_used']
         else:
             temp = "There are no results for the book, " + bookname + \
                 ", in booksrun."
-            url =  ""
-        
-        return [temp,url]
-    return ["Error","Error"]
+            url = ""
+
+        return [temp, url]
+    return ["Error", "Error"]
 
 
 def get_bookImage(isbn):

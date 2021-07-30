@@ -33,11 +33,10 @@ from classes.classes import *
 # sign_up_user("jm@gmail.com", "1234567", "John Macabre", "Sentinel")
 
 
-
 user = User("jk@gmail.com", "JK Rownling", "Oxford")
 add_user_to_db(user)
 
-#978-3-16-148410-0
+# 978-3-16-148410-0
 # title, author, image, isbn
 book = Book("Harry Potter", "JK Rownling", "harry.png", "978-3-16-148410-0")
 add_book_to_db(book, "Emile Conde", "University of New Orleans")

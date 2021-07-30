@@ -22,7 +22,8 @@ storage = firebase.storage()
 
 
 def get_auth():
-    return auth;
+    return auth
+
 
 def sign_in_user(email, password):
     user = auth.sign_in_with_email_and_password(email, password)
@@ -44,31 +45,32 @@ def sign_up_user(email, password, name, college):
     # store profile pic
     add_user_to_db(user)
     return user
-        
-            
-            
+
+
 def get_user_acc_info(user_id_token):
     return auth.get_account_info(user_id_token)
 
 
-
 """STORAGE"""
+
+
 def upload_profile_image(email, fileName):
     if fileName != "":
-        storage.child("user_profile_imgs").child(email).child(email).put(fileName)
-        
-        
+        storage.child("user_profile_imgs").child(
+            email).child(email).put(fileName)
+
 
 def download_user_profile(email, fileName):
     if fileName != "":
-        return storage.child("user_profile_imgs").child(email).child(email).download("", fileName+"s")
+        return storage.child("user_profile_imgs").child(
+            email).child(email).download("", fileName + "s")
 
-    
-# Needs user profile token    
+
+# Needs user profile token
 def get_user_profile_url(email, user_id_token):
-    url = storage.child("user_profile_imgs").child(email).child(email).get_url(user_id_token)
-    return url   
-
+    url = storage.child("user_profile_imgs").child(
+        email).child(email).get_url(user_id_token)
+    return url
 
 
 def upload_book_to_storage(book):
@@ -77,7 +79,3 @@ def upload_book_to_storage(book):
 
 def get_book_from_storage():
     pass
-
-
-
-
