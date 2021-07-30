@@ -1,0 +1,27 @@
+{% extends "base.html" %} 
+{% block content %}
+    <form action="/searchtest" method="POST">
+    <form class="form-inline">
+        <div class="form-group mx-sm-3 mb-2">
+            <label for="ISBN">ISBN</label>
+            <input type="text" class="form-control" id="ISBN" aria-describedby="ISBN" placeholder="Enter ISBN" name="ISBN" style="width:70%; " required>
+        </div>
+        <div class="form-group mx-sm-3 mb-2">
+            <label for="Booktitle">Book Title</label>
+            <input type="text" class="form-control" id="Bookname" aria-describedby="Bookname" placeholder="Enter BookTitle" name="Bookname" style="width:70%; " required>
+        </div>
+        <button type="submit" class="btn btn-primary" >Submit</button>
+    </form>
+
+    <style>
+        img {
+              margin-left: auto;
+              margin-right: auto;
+        }
+    </style>
+    
+    <img src={{image}} alt="User Image" id = 'BookImage' style="display:{{test}}">
+    <p style="text-align : center">{{ text2 }}</p>
+    <p style="text-align : center">{{ text }}</p>
+    <p style="text-align : center">{{ url}}</p>
+{% endblock %}

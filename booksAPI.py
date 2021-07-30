@@ -1,9 +1,13 @@
 import requests
 apiKey = '?key=39dai1oqa1s88gfbi06e'
 baseBuyURL = "https://booksrun.com/api/v3/price/buy/"
+baseGoURL = 'https://www.googleapis.com/books/v1/volumes?q=isbn:'
+
+isbn = 9781284140996
+
 
 def get_bookPrices_json(isbn):
-    if type(isbn) is not str and not int:
+    if not isinstance(isbn, str) and not int:
         return "Error"
     res = requests.get(baseBuyURL +
                        str(isbn) + apiKey)
@@ -27,30 +31,59 @@ def get_bookPrices_json(isbn):
             d['price_new'] = "No new textbooks."
         return d  # Returns a dictionary with the used and new price
     return "Error"
-# of a textbook. Also the url to redirect to the Booksrun website to purchase.of 
+# of a textbook. Also the url to redirect to the Booksrun website to
+# purchase.of
 
 
-def get_bookPrices(bookname, isbn):
-    d = get_bookPrices_json(isbn)
+def get_bookPrices(bookname, json):
+    if not isinstance(json, dict):
+        return ["Error","Error"]
+    d = json
     if d != "Error":
         temp = ""
-        price_new = d['price_used'] == "No used textbooks."
-        price_used = d['price_new'] == "No new textbooks."
+        url = ""
+        price_used = d['price_used'] == "No used textbooks."
+        price_new = d['price_new'] == "No new textbooks."
         if not price_new and not price_used:
             temp = "For the book, " + bookname + \
                    ", the used price in Booksrun is $" + \
                    str(d['price_used']) + \
                    ". The new price is $" + str(d['price_new'])
+            url = "For the used textbook go to : " + \
+                   d['url_used'] + "\n" + \
+                   "For the new textbook go to : " + \
+                   d['url_new']
         elif price_used and not price_new:
             temp = "For the book, " + bookname + \
                 ", there is only new textbooks in Booksrun. " + \
                 "They cost $" + str(d['price_new']) + "."
+            url =  "For the new textbook go to : " + \
+                   d['url_new']
         elif price_new and not price_used:
             temp = "For the book, " + bookname + \
                 ", there is only used textbooks in Booksrun. " + \
                 "They cost $" + str(d['price_used']) + "."
+            url =  "For the used textbook go to : " + \
+                   d['url_used']
         else:
             temp = "There are no results for the book, " + bookname + \
                 ", in booksrun."
-        return temp
-    return "Error"
+            url =  ""
+        
+        return [temp,url]
+    return ["Error","Error"]
+
+
+def get_bookImage(isbn):
+    if not isinstance(isbn, str) and not int:
+        return "Error"
+    json = requests.get(baseGoURL + str(isbn)).json()
+    if json['totalItems'] <= 0:
+        return "Error no images for the book."
+    items = json['items'][0]['volumeInfo']
+    isbn1 = items["industryIdentifiers"][1]["identifier"]
+    isbn2 = items["industryIdentifiers"][0]["identifier"]
+    if isbn1 != str(isbn) and isbn2 != str(isbn):
+        return "No Book returned"
+    else:
+        return items["imageLinks"]['thumbnail']

@@ -1,9 +1,9 @@
 import requests
 from flask import Flask, render_template, url_for, flash, redirect, request
-import forms
 from util.auth_utils import *
 from util.db_utils import *
 from classes.classes import *
+from booksAPI import *
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '766ad3b9779f8e26642e74331dbf694c'
 
@@ -50,6 +50,17 @@ def login():
     return render_template("login.html")
 
 
+@app.route("/searchtest", methods=['GET','POST'])
+def searchAPI():
+    if request.method == "POST":
+        print(request.form)
+        search = get_bookPrices(request.form.get('Bookname'),get_bookPrices_json(request.form.get('ISBN')))
+        ima = get_bookImage(request.form.get('ISBN'))
+        if ima == "Error no images for the book.":
+            return render_template("search.html", text=search[0], image=ima,test="none",text2=ima,url=search[1])
+        print(ima)
+        return render_template("search.html", text=search[0], image=ima,test="block",url=search[1])
+    return render_template("search.html",test="none")
 
 
 
