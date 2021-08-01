@@ -77,10 +77,14 @@ def searchAPI():
     return render_template("search.html", test="none")
 
 
-# USER PROFILE
 @app.route("/profile")
 def user_profile():
     return render_template("user_profile.html")
+
+
+@app.route("/share")
+def share():
+    return render_template("share.html")
 
 
 """STRIPE STUFF"""
