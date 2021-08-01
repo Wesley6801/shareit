@@ -76,5 +76,37 @@ def searchAPI():
     return render_template("search.html", test="none")
 
 
+"""STRIPE STUFF"""
+
+
+@app.route('/checkout')
+def checkout():
+    return render_template('checkout.html')
+
+
+@app.route('/charge', methods=['POST'])
+def charge():
+    api_key = 'sk_test_51JIwIkGPV72h4LJb4DzDOGcEvk5egzo5Uu330ulsWD9VCK9oXc9cuoQ1DtTaefvMoiAzJtqKys4uPyEyKxQwu7Bv00vDmhzAoU'
+    token = request.form.get('stripeToken')
+
+    # todo: stripe stuff
+    headers = {'Authorization': f'Bearer {api_key}'}
+    data = {
+        'amount': 22500,
+        'currency': 'usd',
+        'description': 'Another Charge',
+        'source': token
+    }
+
+    r = requests.post(
+        'https://api.stripe.com/v1/charges',
+        headers=headers,
+        data=data)
+
+    print(r.text)
+
+    return 'Done'
+
+
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0")
