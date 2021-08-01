@@ -33,8 +33,16 @@
       <ul class="navbar-nav ml-auto">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
+
+            <li>
+              <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Search</button>
+              </form>
+            </li>
+
             <li class="nav-item active">
-              <a class="nav-link" href="#">Share<span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="#">Add Book <span class="sr-only">(current)</span></a>
             </li>
 
             <li class="nav-item active">
@@ -58,7 +66,6 @@
         </div>
       </ul>
     </nav>
-
     <!-- END OF NAV BAR -->
         
     {% block content %} {% endblock %}

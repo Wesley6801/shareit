@@ -17,6 +17,19 @@
   font-style: italic;
 }
 
+
+.btn-action{
+  width: 100%;
+}
+
+.book-price{
+  width: 100%;
+  text-align: center;
+  font-style: italic;
+  font-weight: bold;
+}
+
+
 .hr{
   margin: 1px;
 }
@@ -36,7 +49,7 @@
 
 .book-container{
   width: 100%;
-  text-align: center;
+  text-align: left;
   margin: 20px;
 }
 
@@ -63,9 +76,6 @@
 .by{
   font-weight: bold;
 }
-
-
-
 
 
 

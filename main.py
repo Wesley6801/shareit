@@ -88,8 +88,6 @@ def share():
 
 
 """STRIPE STUFF"""
-
-
 @app.route('/checkout')
 def checkout():
     return render_template('checkout.html')

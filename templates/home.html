@@ -8,7 +8,8 @@
 
 {% block content %}
 
-  <!-- CAROUSEL -->
+
+      <!-- CAROUSEL -->
     <div id="carousel1" class="carousel slide carousel-fade" data-ride="carousel" style="height:50vh">
       <!--Indicators-->
       <ol class="carousel-indicators">
@@ -64,16 +65,15 @@
       </a>
       <!--/.Controls-->
     </div>
-  </section>
   <!-- END OF CAROUSEL -->
 
-  <!-- SHARED DIGITAL BOOK SECTION -->
 
-  <div class="section-title-container">
+ <div class="section-title-container">
     <h3 class="section-title">Shared Digital Books:</h3>
-    <p class="view-all-digital">view all</p>
+    <a href="#">
+      <p class="view-all-digital">view all</p>
+    </a>
   </div>
-  <hr>
   <section id="shared-digital-section">
 
     <!-- <div class="book-container">
@@ -90,7 +90,7 @@
             <img class="book-cover-img" src="static/images/harry.png" alt="harry potter" />
             <h6 class="book-title">Harry Potter and the fantastic five beats from all over the world this can go on and on and on reallyi</h6>
             <p class="book-author"><span class="by">By:</span> JK Rowling and Jack Morrison and Somebody </p>
-            <button type="button" class="btn btn-outline-primary">Read</button>
+            <button type="button" class="btn btn-outline-primary btn-action">Read</button>
           </div>
         </div>
 
@@ -99,17 +99,7 @@
             <img class="book-cover-img" src="static/images/harry.png" alt="harry potter" />
             <p class="book-title">Harry Potter and the fantastic five beats from all over the world this can go on and on and on reallyi</p>
             <p class="book-author"><span class="by">By:</span> JK Rowling and Jack Morrison and Somebody </p>
-            <button type="button" class="btn btn-outline-primary">Read</button>
-          </div>
-        </div>
-
-
-        <div class="col-lg-2 col-md-4">
-          <div class="book-container">
-            <img class="book-cover-img" src="static/images/harry.png" alt="harry potter" />
-            <p class="book-title">Harry Potter and the fantastic five beats from all over the world this can go on and on and on reallyi</p>
-            <p class="book-author"><span class="by">By:</span> JK Rowling and Jack Morrison and Somebody </p>
-            <button type="button" class="btn btn-outline-primary">Read</button>
+            <button type="button" class="btn btn-outline-primary btn-action">Read</button>
           </div>
         </div>
 
@@ -119,7 +109,7 @@
             <img class="book-cover-img" src="static/images/harry.png" alt="harry potter" />
             <p class="book-title">Harry Potter and the fantastic five beats from all over the world this can go on and on and on reallyi</p>
             <p class="book-author"><span class="by">By:</span> JK Rowling and Jack Morrison and Somebody </p>
-            <button type="button" class="btn btn-outline-primary">Read</button>
+            <button type="button" class="btn btn-outline-primary btn-action">Read</button>
           </div>
         </div>
 
@@ -129,7 +119,17 @@
             <img class="book-cover-img" src="static/images/harry.png" alt="harry potter" />
             <p class="book-title">Harry Potter and the fantastic five beats from all over the world this can go on and on and on reallyi</p>
             <p class="book-author"><span class="by">By:</span> JK Rowling and Jack Morrison and Somebody </p>
-            <button type="button" class="btn btn-outline-primary">Read</button>
+            <button type="button" class="btn btn-outline-primary btn-action">Read</button>
+          </div>
+        </div>
+
+
+        <div class="col-lg-2 col-md-4">
+          <div class="book-container">
+            <img class="book-cover-img" src="static/images/harry.png" alt="harry potter" />
+            <p class="book-title">Harry Potter and the fantastic five beats from all over the world this can go on and on and on reallyi</p>
+            <p class="book-author"><span class="by">By:</span> JK Rowling and Jack Morrison and Somebody </p>
+            <button type="button" class="btn btn-outline-primary btn-action">Read</button>
           </div>
         </div>
 
@@ -138,7 +138,7 @@
             <img class="book-cover-img" src="static/images/harry.png" alt="harry potter" />
             <p class="book-title">Harry Potter and the fantastic five beats from all over the world this can go on and on and on reallyi</p>
             <p class="book-author"><span class="by">By:</span> JK Rowling and Jack Morrison and Somebody </p>
-            <button type="button" class="btn btn-outline-primary">Read</button>
+            <button type="button" class="btn btn-outline-primary btn-action">Read</button>
           </div>
         </div>
 
@@ -149,147 +149,159 @@
 
 
 
+  <hr>
+  <div class="section-title-container">
+    <h3 class="section-title">Shared Pysical Books:</h3>
+    <a href="#">
+      <p class="view-all-paper-back">view all</p>
+    </a>
+  </div>
+  <!-- SHARED PAPER BACK -->
+  <section id="paper-back-section">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-2 col-md-4">
+          <div class="book-container">
+            <img class="book-cover-img" src="static/images/harry.png" alt="harry potter" />
+            <h6 class="book-title">Harry Potter and the fantastic five beats from all over the world this can go on and on and on reallyi</h6>
+            <p class="book-author"><span class="by">By:</span> JK Rowling and Jack Morrison and Somebody </p>
+            <p class="sharer"><span class="by">Shared by:</span> <a href="#">Some dude</a></p>
+            <button type="button" class="btn btn-outline-primary btn-action">More</button>
+          </div>
+        </div>
 
+        <div class="col-lg-2 col-md-4">
+          <div class="book-container">
+            <img class="book-cover-img" src="static/images/harry.png" alt="harry potter" />
+            <h6 class="book-title">Harry Potter and the fantastic five beats from all over the world this can go on and on and on reallyi</h6>
+            <p class="book-author"><span class="by">By:</span> JK Rowling and Jack Morrison and Somebody </p>
+            <p class="sharer"><span class="by">Shared by:</span> <a href="#">Some dude</a></p>
+            <button type="button" class="btn btn-outline-primary btn-action">More</button>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-4">
+          <div class="book-container">
+            <img class="book-cover-img" src="static/images/harry.png" alt="harry potter" />
+            <h6 class="book-title">Harry Potter and the fantastic five beats from all over the world this can go on and on and on reallyi</h6>
+            <p class="book-author"><span class="by">By:</span> JK Rowling and Jack Morrison and Somebody </p>
+            <p class="sharer"><span class="by">Shared by:</span> <a href="#">Some dude</a></p>
+            <button type="button" class="btn btn-outline-primary btn-action">More</button>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-4">
+          <div class="book-container">
+            <img class="book-cover-img" src="static/images/harry.png" alt="harry potter" />
+            <h6 class="book-title">Harry Potter and the fantastic five beats from all over the world this can go on and on and on reallyi</h6>
+            <p class="book-author"><span class="by">By:</span> JK Rowling and Jack Morrison and Somebody </p>
+            <p class="sharer"><span class="by">Shared by:</span> <a href="#">Some dude</a></p>
+            <button type="button" class="btn btn-outline-primary btn-action">More</button>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-4">
+          <div class="book-container">
+            <img class="book-cover-img" src="static/images/harry.png" alt="harry potter" />
+            <h6 class="book-title">Harry Potter and the fantastic five beats from all over the world this can go on and on and on reallyi</h6>
+            <p class="book-author"><span class="by">By:</span> JK Rowling and Jack Morrison and Somebody </p>
+            <p class="sharer"><span class="by">Shared by:</span> <a href="#">Some dude</a></p>
+            <button type="button" class="btn btn-outline-primary btn-action">More</button>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-4">
+          <div class="book-container">
+            <img class="book-cover-img" src="static/images/harry.png" alt="harry potter" />
+            <h6 class="book-title">Harry Potter and the fantastic five beats from all over the world this can go on and on and on reallyi</h6>
+            <p class="book-author"><span class="by">By:</span> JK Rowling and Jack Morrison and Somebody </p>
+            <p class="sharer"><span class="by">Shared by:</span> <a href="#">Some dude</a></p>
+            <button type="button" class="btn btn-outline-primary btn-action">More</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <!--END SHARED PAPER BACK -->
+
+
+  <!-- FOR SALE BOOK SECTION -->
+  <hr>
 
   <div class="section-title-container">
-    <h3 class="section-title">Shared Digital Books:</h3>
-    <p class="view-all-paper-back">view all</p>
+    <h3 class="section-title">For Sale:</h3>
+    <a href="#">
+      <p class="view-all-for-sale">view all</p>
+    </a>
   </div>
-  <hr>
-<!-- SHARED PAPER BACK -->
-<section id="paper-back-section">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-lg-2 col-md-4">
-        <div class="book-container">
-          <img class="book-cover-img" src="static/images/harry.png" alt="harry potter" />
-          <h6 class="book-title">Harry Potter and the fantastic five beats from all over the world this can go on and on and on reallyi</h6>
-          <p class="book-author"><span class="by">By:</span> JK Rowling and Jack Morrison and Somebody </p>
-          <button type="button" class="btn btn-outline-primary">Read</button>
+
+  <section id="for-section">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-2 col-md-4">
+          <div class="book-container">
+            <img class="book-cover-img" src="static/images/harry.png" alt="harry potter" />
+            <h6 class="book-title">Harry Potter and the fantastic five beats from all over the world this can go on and on and on reallyi</h6>
+            <p class="book-author"><span class="by">By:</span> JK Rowling and Jack Morrison and Somebody </p>
+            <p class="book-price">$19.99</p>
+            <button type="button" class="btn btn-outline-primary btn-action">Buy</button>
+          </div>
         </div>
-      </div>
 
-      <div class="col-lg-2 col-md-4">
-        <div class="book-container">
-          <img class="book-cover-img" src="static/images/harry.png" alt="harry potter" />
-          <p class="book-title">Harry Potter and the fantastic five beats from all over the world this can go on and on and on reallyi</p>
-          <p class="book-author"><span class="by">By:</span> JK Rowling and Jack Morrison and Somebody </p>
-          <button type="button" class="btn btn-outline-primary">Read</button>
+        <div class="col-lg-2 col-md-4">
+          <div class="book-container">
+            <img class="book-cover-img" src="static/images/harry.png" alt="harry potter" />
+            <h6 class="book-title">Harry Potter and the fantastic five beats from all over the world this can go on and on and on reallyi</h6>
+            <p class="book-author"><span class="by">By:</span> JK Rowling and Jack Morrison and Somebody </p>
+            <p class="book-price">$19.99</p>
+            <button type="button" class="btn btn-outline-primary btn-action">Buy</button>
+          </div>
         </div>
-      </div>
 
-
-      <div class="col-lg-2 col-md-4">
-        <div class="book-container">
-          <img class="book-cover-img" src="static/images/harry.png" alt="harry potter" />
-          <p class="book-title">Harry Potter and the fantastic five beats from all over the world this can go on and on and on reallyi</p>
-          <p class="book-author"><span class="by">By:</span> JK Rowling and Jack Morrison and Somebody </p>
-          <button type="button" class="btn btn-outline-primary">Read</button>
+        <div class="col-lg-2 col-md-4">
+          <div class="book-container">
+            <img class="book-cover-img" src="static/images/harry.png" alt="harry potter" />
+            <h6 class="book-title">Harry Potter and the fantastic five beats from all over the world this can go on and on and on reallyi</h6>
+            <p class="book-author"><span class="by">By:</span> JK Rowling and Jack Morrison and Somebody </p>
+            <p class="book-price">$19.99</p>
+            <button type="button" class="btn btn-outline-primary btn-action">Buy</button>
+          </div>
         </div>
-      </div>
 
-
-      <div class="col-lg-2 col-md-4">
-        <div class="book-container">
-          <img class="book-cover-img" src="static/images/harry.png" alt="harry potter" />
-          <p class="book-title">Harry Potter and the fantastic five beats from all over the world this can go on and on and on reallyi</p>
-          <p class="book-author"><span class="by">By:</span> JK Rowling and Jack Morrison and Somebody </p>
-          <button type="button" class="btn btn-outline-primary">Read</button>
+        <div class="col-lg-2 col-md-4">
+          <div class="book-container">
+            <img class="book-cover-img" src="static/images/harry.png" alt="harry potter" />
+            <h6 class="book-title">Harry Potter and the fantastic five beats from all over the world this can go on and on and on reallyi</h6>
+            <p class="book-author"><span class="by">By:</span> JK Rowling and Jack Morrison and Somebody </p>
+            <p class="book-price">$19.99</p>
+            <button type="button" class="btn btn-outline-primary btn-action">Buy</button>
+          </div>
         </div>
-      </div>
 
-
-      <div class="col-lg-2 col-md-4">
-        <div class="book-container">
-          <img class="book-cover-img" src="static/images/harry.png" alt="harry potter" />
-          <p class="book-title">Harry Potter and the fantastic five beats from all over the world this can go on and on and on reallyi</p>
-          <p class="book-author"><span class="by">By:</span> JK Rowling and Jack Morrison and Somebody </p>
-          <button type="button" class="btn btn-outline-primary">Read</button>
+        <div class="col-lg-2 col-md-4">
+          <div class="book-container">
+            <img class="book-cover-img" src="static/images/harry.png" alt="harry potter" />
+            <h6 class="book-title">Harry Potter and the fantastic five beats from all over the world this can go on and on and on reallyi</h6>
+            <p class="book-author"><span class="by">By:</span> JK Rowling and Jack Morrison and Somebody </p>
+            <p class="book-price">$19.99</p>
+            <button type="button" class="btn btn-outline-primary btn-action">Buy</button>
+          </div>
         </div>
-      </div>
 
-      <div class="col-lg-2 col-md-4">
-        <div class="book-container">
-          <img class="book-cover-img" src="static/images/harry.png" alt="harry potter" />
-          <p class="book-title">Harry Potter and the fantastic five beats from all over the world this can go on and on and on reallyi</p>
-          <p class="book-author"><span class="by">By:</span> JK Rowling and Jack Morrison and Somebody </p>
-          <button type="button" class="btn btn-outline-primary">Read</button>
+        <div class="col-lg-2 col-md-4">
+          <div class="book-container">
+            <img class="book-cover-img" src="static/images/harry.png" alt="harry potter" />
+            <h6 class="book-title">Harry Potter and the fantastic five beats from all over the world this can go on and on and on reallyi</h6>
+            <p class="book-author"><span class="by">By:</span> JK Rowling and Jack Morrison and Somebody </p>
+            <p class="book-price">$19.99</p>
+            <button type="button" class="btn btn-outline-primary btn-action">Buy</button>
+          </div>
         </div>
-      </div>
-
-</section>
-<!--END SHARED PAPER BACK -->
 
 
-<!-- FOR SALE BOOK SECTION -->
-<div class="section-title-container">
-  <h3 class="section-title">For Sale:</h3>
-  <p class="view-all-for-sale">view all</p>
-</div>
-<hr>
-
-<section id="for-section">
-
-</section>
-<!-- END FOR SALE SECTION -->
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-lg-2 col-md-4">
-      <div class="book-container">
-        <img class="book-cover-img" src="static/images/harry.png" alt="harry potter" />
-        <h6 class="book-title">Harry Potter and the fantastic five beats from all over the world this can go on and on and on reallyi</h6>
-        <p class="book-author"><span class="by">By:</span> JK Rowling and Jack Morrison and Somebody </p>
-        <button type="button" class="btn btn-outline-primary">Read</button>
       </div>
     </div>
-
-    <div class="col-lg-2 col-md-4">
-      <div class="book-container">
-        <img class="book-cover-img" src="static/images/harry.png" alt="harry potter" />
-        <p class="book-title">Harry Potter and the fantastic five beats from all over the world this can go on and on and on reallyi</p>
-        <p class="book-author"><span class="by">By:</span> JK Rowling and Jack Morrison and Somebody </p>
-        <button type="button" class="btn btn-outline-primary">Read</button>
-      </div>
-    </div>
-
-
-    <div class="col-lg-2 col-md-4">
-      <div class="book-container">
-        <img class="book-cover-img" src="static/images/harry.png" alt="harry potter" />
-        <p class="book-title">Harry Potter and the fantastic five beats from all over the world this can go on and on and on reallyi</p>
-        <p class="book-author"><span class="by">By:</span> JK Rowling and Jack Morrison and Somebody </p>
-        <button type="button" class="btn btn-outline-primary">Read</button>
-      </div>
-    </div>
-
-
-    <div class="col-lg-2 col-md-4">
-      <div class="book-container">
-        <img class="book-cover-img" src="static/images/harry.png" alt="harry potter" />
-        <p class="book-title">Harry Potter and the fantastic five beats from all over the world this can go on and on and on reallyi</p>
-        <p class="book-author"><span class="by">By:</span> JK Rowling and Jack Morrison and Somebody </p>
-        <button type="button" class="btn btn-outline-primary">Read</button>
-      </div>
-    </div>
-
-
-    <div class="col-lg-2 col-md-4">
-      <div class="book-container">
-        <img class="book-cover-img" src="static/images/harry.png" alt="harry potter" />
-        <p class="book-title">Harry Potter and the fantastic five beats from all over the world this can go on and on and on reallyi</p>
-        <p class="book-author"><span class="by">By:</span> JK Rowling and Jack Morrison and Somebody </p>
-        <button type="button" class="btn btn-outline-primary">Read</button>
-      </div>
-    </div>
-
-    <div class="col-lg-2 col-md-4">
-      <div class="book-container">
-        <img class="book-cover-img" src="static/images/harry.png" alt="harry potter" />
-        <p class="book-title">Harry Potter and the fantastic five beats from all over the world this can go on and on and on reallyi</p>
-        <p class="book-author"><span class="by">By:</span> JK Rowling and Jack Morrison and Somebody </p>
-        <button type="button" class="btn btn-outline-primary">Read</button>
-      </div>
-    </div>
-
-    
+  </section>
+  <!-- END FOR SALE SECTION -->
 {% endblock %}
