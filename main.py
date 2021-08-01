@@ -6,6 +6,7 @@ from classes.classes import *
 from booksAPI import *
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '766ad3b9779f8e26642e74331dbf694c'
+STRIPE_API_KEY = 'sk_test_51JIwIkGPV72h4LJb4DzDOGcEvk5egzo5Uu330ulsWD9VCK9oXc9cuoQ1DtTaefvMoiAzJtqKys4uPyEyKxQwu7Bv00vDmhzAoU'
 
 
 @app.route("/")
@@ -76,6 +77,12 @@ def searchAPI():
     return render_template("search.html", test="none")
 
 
+# USER PROFILE
+@app.route("/profile")
+def user_profile():
+    return render_template("user_profile.html")
+
+
 """STRIPE STUFF"""
 
 
@@ -86,7 +93,7 @@ def checkout():
 
 @app.route('/charge', methods=['POST'])
 def charge():
-    api_key = 'sk_test_51JIwIkGPV72h4LJb4DzDOGcEvk5egzo5Uu330ulsWD9VCK9oXc9cuoQ1DtTaefvMoiAzJtqKys4uPyEyKxQwu7Bv00vDmhzAoU'
+    api_key = STRIPE_API_KEY
     token = request.form.get('stripeToken')
 
     # todo: stripe stuff

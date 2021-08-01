@@ -1,0 +1,122 @@
+/* general */
+.section-title{
+  margin: 10px 20px;
+  display: inline-block;
+  bottom: 10px;
+}
+
+.section-title-container{
+  width: 100%;
+  text-align: center;
+}
+
+
+.view-all-digital, .view-all-paper-back, .view-all-for-sale{
+  text-align: right;
+  margin-right: 20px;
+  font-style: italic;
+}
+
+.hr{
+  margin: 1px;
+}
+
+.row{
+  width: 100%;
+}
+
+
+/* shared books */
+.book-cover-img{
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  height: auto;
+}
+
+.book-container{
+  width: 100%;
+  text-align: center;
+  margin: 20px;
+}
+
+.book-cover:hover{
+  transform: translateY(-5px);
+  box-shadow: none;
+}
+
+.book-title{
+  padding: 0;
+  margin: 1px;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.book-author{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.by{
+  font-weight: bold;
+}
+
+
+
+
+
+
+/* carousel */
+.carousel-item.active, .carousel-item .view {
+      height: 50vh!important;
+    }
+
+    .carousel-item img {
+      object-fit: cover;
+      width:100%!important;
+      height: 100% !important;
+    }
+
+    .content h1 {
+      font-size: 55px;
+    }
+
+    @media screen and (max-width: 320px) {
+      .content h1 {
+        font-size: 30px;
+      }
+    }
+
+    @media screen and (min-width: 321px) and (max-width: 768px) {
+      .content h1 {
+        font-size: 30px;
+      }
+
+
+    }
+
+    .content h5 {
+      font-size: 23px;
+      margin-left: 80px;
+      margin-right: 80px;
+    }
+
+    @media screen and (max-width: 320px) {
+      .content h5 {
+        font-size: 18px;
+        margin-left: 20px;
+        margin-right: 20px
+      }
+
+    }
+
+    @media screen and (min-width: 321px) and (max-width: 768px) {
+      .content h5 {
+        font-size: 18px;
+        margin-left: 20px;
+        margin-right: 20px;
+      }
+    }
