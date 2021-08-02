@@ -1,23 +1,30 @@
 import requests
-from flask import Flask, render_template, url_for, flash, redirect, request
+from flask import Flask, render_template, url_for, flash, redirect, request, session
 from util.auth_utils import *
 from util.db_utils import *
 from classes.classes import *
 from booksAPI import *
+from datetime import timedelta
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '766ad3b9779f8e26642e74331dbf694c'
 STRIPE_API_KEY = 'sk_test_51JIwIkGPV72h4LJb4DzDOGcEvk5egzo5Uu330ulsWD9VCK9oXc9cuoQ1DtTaefvMoiAzJtqKys4uPyEyKxQwu7Bv00vDmhzAoU'
-
+# make sessions last longer - 5 days in this case
+app.permanent_session_lifetime = timedelta(days=5)
 
 @app.route("/")
+@app.route("/home")
 def home():
-    return render_template("home.html")
+    if "token" in session:
+        return render_template("home.html")
+    else:
+        return render_template("login.html")
 
 
 @app.route("/register", methods=['GET', 'POST'])
 def register_page():
     unsuccessful = "Make sure the passwords match"
     if request.method == "POST":
+        session.permanent = True
         name = request.form.get('name')
         email = request.form.get('email')
         password = request.form.get('password')
@@ -26,8 +33,16 @@ def register_page():
         if password == confirmed_password:
             try:
                 user = sign_up_user(email, password, name, college)
-                return render_template("home.html")
-            except BaseException:
+                info = auth.get_account_info(user['idToken'])
+                email = info['users'][0].get('email')
+                #store info in db
+                userObj = User(email, name, college)
+                add_user_to_db(userObj)
+                #store info in session
+                session['email'] = email
+                session['token'] = user['idToken']
+                return redirect(url_for("home"))
+            except BaseException as err:
                 unsuccessful_register = "Something went wrong"
                 return render_template(
                     "register.html", unsuccessful=unsuccessful)
@@ -35,19 +50,36 @@ def register_page():
     return render_template("register.html")
 
 
+
 @app.route("/login", methods=['GET', 'POST'])
-def login():
+def login():    
     unsuccessful = "Check your email or password."
     if request.method == "POST":
+        session.permanent = True
         email = request.form.get('email')
         password = request.form.get('password')
         try:
             user = sign_in_user(email, password)
-            return render_template("home.html")
-        except BaseException:
+            #storing info in session
+            session['email'] = email
+            session['token'] = user['idToken']
+            return redirect(url_for("home"))
+        except:
             return render_template("login.html", unsuccessful=unsuccessful)
-
     return render_template("login.html")
+
+
+
+
+@app.route("/logout")
+def logout():
+    session.pop("email", None)
+    session.pop("token", None)
+    return redirect(url_for("login"))
+    
+
+
+
 
 
 @app.route("/searchtest", methods=['GET', 'POST'])
@@ -77,14 +109,20 @@ def searchAPI():
     return render_template("search.html", test="none")
 
 
+
+
 @app.route("/profile")
 def user_profile():
     return render_template("user_profile.html")
 
 
+
+
 @app.route("/share")
 def share():
     return render_template("share.html")
+
+
 
 
 """STRIPE STUFF"""
@@ -113,7 +151,7 @@ def charge():
         data=data)
 
     print(r.text)
-
+    # todo: create a thank you page
     return 'Done'
 
 

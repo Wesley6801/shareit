@@ -10,6 +10,9 @@
   text-align: center;
 }
 
+.search-bar-button{
+    color: white;
+}
 
 .view-all-digital, .view-all-paper-back, .view-all-for-sale{
   text-align: right;

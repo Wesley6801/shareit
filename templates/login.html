@@ -11,27 +11,27 @@
               <h3 class="login-heading mb-4">Welcome back!</h3>
 
               <!-- Sign In Form -->
-              <form>
+              <form  action="/login" method="POST">
                 <div class="form-floating mb-3">
-                  <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                  <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="email">
                   <label for="floatingInput">Email address</label>
                 </div>
                 <div class="form-floating mb-3">
-                  <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                  <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name=password>
                   <label for="floatingPassword">Password</label>
                 </div>
 
                 <div class="form-check mb-3">
                   <input class="form-check-input" type="checkbox" value="" id="rememberPasswordCheck">
                   <label class="form-check-label" for="rememberPasswordCheck">
-                    Remember password
+                    Remember me
                   </label>
                 </div>
 
                 <div class="d-grid">
                   <button class="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2" type="submit">Sign in</button>
                   <div class="text-center">
-                    <p>Don't have an account? <span><a class="small sign-up" href="#">sign up</a></span></p>
+                    <p>Don't have an account? <span><a class="small sign-up" href="{{url_for('register_page')}}">sign up</a></span></p>
                   </div>
                 </div>
 

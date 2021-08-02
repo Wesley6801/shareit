@@ -10,36 +10,36 @@
             <div class="col-md-9 col-lg-8 mx-auto">
               <h3 class="login-heading mb-4">Welcome!</h3>
 
-              <!-- Sign In Form -->
-              <form>
+              <!-- Register Form -->
+              <form action="/register" method="POST">
                 <div class="form-floating mb-3">
-                  <input type="text" class="form-control" id="floatingInput" placeholder="Luna Lovegood">
+                  <input type="text" class="form-control" id="floatingInput" placeholder="Luna Lovegood" name = "name">
                   <label for="floatingInput">Name</label>
                 </div>
 
                 <div class="form-floating mb-3">
-                  <input type="text" class="form-control" id="floatingInput" placeholder="Hogwarts">
+                  <input type="text" class="form-control" id="floatingInput" placeholder="Hogwarts" name = "college">
                   <label for="floatingInput">College</label>
                 </div>
 
                 <div class="form-floating mb-3">
-                  <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                  <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name = "email">
                   <label for="floatingInput">Email address</label>
                 </div>
                 <div class="form-floating mb-3">
-                  <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                  <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name = "password">
                   <label for="floatingPassword">Password</label>
                 </div>
 
                 <div class="form-floating mb-3">
-                  <input type="password" class="form-control" id="floatingPassword" placeholder="Confirm Password">
+                  <input type="password" class="form-control" id="floatingPassword" placeholder="Confirm Password" name = "confirmed_password">
                   <label for="floatingPassword">Confirm Password</label>
                 </div>
 
                 <div class="d-grid">
-                  <button class="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2" type="submit">Sign in</button>
+                  <button class="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2" type="submit">Register</button>
                   <div class="text-center">
-                    <p>Have an account? <span><a class="small sign-up" href="#">sign in</a></span></p>
+                    <p>Have an account? <span><a class="small sign-up" href="{{url_for('login')}}">sign in</a></span></p>
                   </div>
                 </div>
 

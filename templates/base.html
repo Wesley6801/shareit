@@ -35,9 +35,9 @@
           <ul class="navbar-nav mr-auto">
 
             <li>
-              <form class="form-inline my-2 my-lg-0">
+              <form class="form-inline my-2 my-lg-0 search-bar">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Search</button>
+                <button class="btn btn-outline-primary my-2 my-sm-0 search-bar-button" type="submit">Search</button>
               </form>
             </li>
 
@@ -57,7 +57,7 @@
                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left">
                   <button class="dropdown-item" type="button">Profile</button>
                   <button class="dropdown-item" type="button">My Books</button>
-                  <button class="dropdown-item" type="button">Sign Out</button>
+                   <a class="nav-link" href="{{url_for('logout')}}"><button class="dropdown-item" type="button">Sign Out</button></a>                 
                 </div>
               </div>
             </li>

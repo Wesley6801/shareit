@@ -21,30 +21,17 @@ auth = firebase.auth()
 storage = firebase.storage()
 
 
-def get_auth():
-    return auth
-
-
 def sign_in_user(email, password):
     user = auth.sign_in_with_email_and_password(email, password)
     print("Sucessfully signed in!")
-    info = auth.get_account_info(user['idToken'])
-    email = info['users'][0].get('email')
-    # store info in db
-    # store profile pic
     return user
 
 
 def sign_up_user(email, password, name, college):
     user = auth.create_user_with_email_and_password(email, password)
     print("Sucess!")
-    info = auth.get_account_info(user['idToken'])
-    email = info['users'][0].get('email')
-    # store info in db
-    user = User(email, name, college)
-    # store profile pic
-    add_user_to_db(user)
     return user
+
 
 
 def get_user_acc_info(user_id_token):
