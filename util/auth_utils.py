@@ -46,13 +46,24 @@ def upload_profile_image(email, fileName):
         storage.child("user_profile_imgs").child(
             email).child("profile.png").put(fileName)
 
+        
+
+def get_cover(isbn, user_id_token):
+    return storage.child('covers').child(isbn).get_url(user_id_token)
+
+
+
+def get_pdf(isbn, user_id_token):
+    return storage.child('pdfs').child(isbn).get_url(user_id_token)
+
+
 
 def download_user_profile(email, fileName):
     if fileName != "":
         try:
             return storage.child("user_profile_imgs").child(
                 email).child("profile.png").download("", fileName + "s")
-        except:
+        except BaseException:
             return ""
     return ""
 
@@ -64,19 +75,24 @@ def get_user_profile_url(email, user_id_token):
     return url
 
 
-
-def upload_book_cover_to_storage(email, isbn, book):
+def upload_book_cover_to_storage(isbn, book):
     if isinstance(book, str):
         try:
-            storage.child("images").child(email).child(isbn).put(book)
+            storage.child("covers").child(isbn).put(book)
             return True
         except BaseException:
             return False
     return False
 
+def get_bookCover_url(isbn, user_id_token):
+    if isinstance(isbn,str):
+        try:
+            return storage.child("covers").child(isbn).get_url(user_id_token)
+        except:
+            return ""
 
-def upload_pdf_to_storage(email,file, isbn):
-     storage.child("pdfs").child(email).child(isbn).put(file)
+def upload_pdf_to_storage(file, isbn):
+    storage.child("pdfs").child(isbn).put(file)
 
 
 def get_book_from_storage(email, book):

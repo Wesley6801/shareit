@@ -48,7 +48,7 @@
             </li>
 
             <li class="nav-item active">
-              <a class="nav-link" href="#">Cart <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="{{url_for('cart')}}">Cart <span class="sr-only">(current)</span></a>
             </li>
 
             <li class="nav-item dropdown">
@@ -58,7 +58,7 @@
                 </button>
                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left">
                   <a href="{{url_for('user_profile')}}"><button class="dropdown-item" type="button">Profile</button></a>
-                  <button class="dropdown-item" type="button">My Books</button>
+                    <a href="/mybooks"><button class="dropdown-item" type="button">My Books</button></a>
                   <a href="/searchtest"><button class="dropdown-item" type="button">Booksrun Search</button></a>
                   <a href="{{url_for('logout')}}"><button class="dropdown-item" type="button">Sign Out</button></a>                 
                 </div>
@@ -70,7 +70,6 @@
       </ul>
     </nav>
     <!-- END OF NAV BAR -->
-        
     {% block content %} {% endblock %}
 
 </body>

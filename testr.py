@@ -33,10 +33,48 @@ from classes.classes import *
 # sign_up_user("jm@gmail.com", "1234567", "John Macabre", "Sentinel")
 
 
-user = User("jk@gmail.com", "JK Rownling", "Oxford")
-add_user_to_db(user)
+# user = User("jk@gmail.com", "JK Rownling", "Oxford")
+# add_user_to_db(user)
 
 # 978-3-16-148410-0
 # title, author, image, isbn
-book = Book("Harry Potter", "JK Rownling", "harry.png", "978-3-16-148410-0")
-add_book_to_db(book, "Emile Conde", "University of New Orleans")
+# book = Book("Harry Potter", "JK Rownling", "harry.png", "978-3-16-148410-0")
+# add_book_to_db(book, "Emile Conde", "University of New Orleans")
+
+# user = sign_in_user("jack@theman.com", "jack123")
+# print(user["idToken"])
+
+# user = sign_up_user("test@gmail.com", 1234567, "test", "somewhere")
+# print(user['idToken'])
+
+# try:
+#     name = "Joe"
+#     college = "Something"
+#     user = sign_up_user("test@gmail.com", 1234567, "test", "somewhere")
+#     info = auth.get_account_info(user['idToken'])
+#     email = info['users'][0].get('email')
+#     # store info in db
+#     user = User(email, name, college)
+#     add_user_to_db(user)
+#     # store info in session
+#     em = email
+#     tk = user['idToken']
+#     print(em)
+#     print(tk)
+# except BaseException as err:
+#     print(err)
+# print(type(get_user_from_db("jack@theman.com")))
+# update_user_info(email="jack@theman.com",value={'email' : 'jack@theman.com', 'name' : 'Jackie', 'college' : 'UNO'})
+# print(get_user_by_email("jack@theman.com"))
+# update = {
+#             'email': 'jack@theman.com',
+#             'name': "John",
+#             'college': "Princeton"
+#         }
+# update_user_info("jack@theman.com", update)
+
+# upload_book_to_storage("jack@theman.com", "chillies.png")
+# user = sign_in_user("jack@theman.com", "jack123")
+# print(user["idToken"])
+# print(get_cover_by_isbn("03989894564", user["idToken"]))
+# print(get_paid_books("CSI"))
