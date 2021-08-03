@@ -1,0 +1,30 @@
+.col-lg{
+    background-color: grey;
+}
+
+.synopsis-body{
+    margin-top: 1px;
+}
+
+.synopsis{
+    width: 100%;
+    margin-bottom: 1px;
+}
+
+.bouton{
+    width: 200px;
+    margin: 10px;
+    margin-bottom: 20px;
+}
+
+.book-img{
+  width: 100%;
+}
+
+.item-container{
+  margin:10px;
+}
+
+.book-title{
+  margin-bottom: 30px;
+}

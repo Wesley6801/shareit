@@ -65,7 +65,7 @@ def get_user_profile_url(email, user_id_token):
 
 
 
-def upload_book_cover_to_storage(isbn, book):
+def upload_book_cover_to_storage(email, isbn, book):
     if isinstance(book, str):
         try:
             storage.child("images").child(email).child(isbn).put(book)
@@ -75,8 +75,8 @@ def upload_book_cover_to_storage(isbn, book):
     return False
 
 
-def upload_pdf_to_storage(file, isbn):
-     storage.child("pdfs").child(isbn).put(file)
+def upload_pdf_to_storage(email,file, isbn):
+     storage.child("pdfs").child(email).child(isbn).put(file)
 
 
 def get_book_from_storage(email, book):

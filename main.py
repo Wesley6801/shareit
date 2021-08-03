@@ -30,7 +30,12 @@ uploads = os.path.join(
 upload = os.path.join(
     os.path.dirname(
         os.path.realpath(__file__)),
-    'static/image')
+    'static/images')
+
+pdfs = os.path.join(
+    os.path.dirname(
+        os.path.realpath(__file__)),
+    'static/pdfs')
 
 
 @app.route("/")
@@ -199,17 +204,15 @@ def share():
         # def add_book_to_db(book, owner_email, owner_college, is_paper_back):
         title = request.form.get('title')
         author = request.form.get('author')
-        isbn = request.form.get('isbn')
-        cover = request.form.get('cover')
-        
+        isbn = request.form.get('isbn')        
         is_paper_back = 'is_paper_back' in request.form
-        if request.form['pdf']!='':
-            pdf = request.form.get('pdf')
-            for filename in os.listdir(pdf):
-                abs_file_path = os.path.abspath(pdf)
-                if filename.endswith('.pdf'):
-                    with open(abs_file_path,'r') as f:
-                        upload_pdf_to_storage(f, isbn)
+        if request.files['pdf'].filename!="":
+            pdf = request.files['pdf']
+            if pdf.filename.endswith('.pdf'):
+                pdf.save(os.path.join(pdfs, secure_filename(pdf.filename)))
+                upload_pdf_to_storage(current_user.get('email'), "static/pdfs/" +
+                secure_filename(
+                    pdf.filename), isbn)
                         
             
         price = request.form.get('price')
@@ -218,9 +221,12 @@ def share():
         current_user_email = current_user.get('email')
         current_user_college = get_user_by_email(
         current_user_email).get('college')
+        cover = request.files['cover']
         if cover:
-            cover.save(os.path.join(upload, secure_filename(image.filename)))
-            upload_book_cover_to_storage(isbn, cover)
+            cover.save(os.path.join(upload, secure_filename(cover.filename)))
+            upload_book_cover_to_storage(current_user_email,isbn, "static/images/" +
+                secure_filename(
+                    cover.filename))
         add_book_to_db(book, current_user_email, current_user_college)
 
     return render_template("share.html")
@@ -229,6 +235,24 @@ def share():
 @app.route("/mybooks")
 def myBooks():
     return render_template("mybooks.html")
+
+
+
+
+@app.route("/buy")
+def buy():
+    return render_template("checkout_page.html")
+
+
+
+@app.route("/detail")
+def detail():
+    return render_template("book_details.html")    
+
+
+@app.route("/cart")
+def cart():
+    return render_template("cart.html")
 
 
 '''STRIPE STUFF'''
