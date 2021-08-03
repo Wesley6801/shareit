@@ -9,11 +9,12 @@ class User:
         
         
 class Book:
-    def __init__(self, title, author, image, isbn):
+    def __init__(self, title, author, isbn, price, is_digital):
         self.title = title
         self.author = author
-        self.image = image
         self.isbn = isbn
+        self.price = price
+        self.is_digital = is_digital
     
 
         

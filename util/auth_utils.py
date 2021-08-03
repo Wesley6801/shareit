@@ -3,6 +3,7 @@ import pyrebase
 import urllib.request
 from classes.classes import *
 from util.db_utils import *
+import os.path
 
 # Pyrebase setup
 firebaseConfig = {
@@ -33,7 +34,6 @@ def sign_up_user(email, password, name, college):
     return user
 
 
-
 def get_user_acc_info(user_id_token):
     return auth.get_account_info(user_id_token)
 
@@ -44,25 +44,48 @@ def get_user_acc_info(user_id_token):
 def upload_profile_image(email, fileName):
     if fileName != "":
         storage.child("user_profile_imgs").child(
-            email).child(email).put(fileName)
+            email).child("profile.png").put(fileName)
 
 
 def download_user_profile(email, fileName):
     if fileName != "":
-        return storage.child("user_profile_imgs").child(
-            email).child(email).download("", fileName + "s")
+        try:
+            return storage.child("user_profile_imgs").child(
+                email).child("profile.png").download("", fileName + "s")
+        except:
+            return ""
+    return ""
 
 
 # Needs user profile token
 def get_user_profile_url(email, user_id_token):
     url = storage.child("user_profile_imgs").child(
-        email).child(email).get_url(user_id_token)
+        email).child("profile.png").get_url(user_id_token)
     return url
 
 
-def upload_book_to_storage(book):
-    pass
+
+def upload_book_cover_to_storage(isbn, book):
+    if isinstance(book, str):
+        try:
+            storage.child("images").child(email).child(isbn).put(book)
+            return True
+        except BaseException:
+            return False
+    return False
 
 
-def get_book_from_storage():
-    pass
+def upload_pdf_to_storage(file, isbn):
+     storage.child("pdfs").child(isbn).put(file)
+
+
+def get_book_from_storage(email, book):
+    b = isinstance(book, str)
+    e = isinstance(email, str)
+    if b and e:
+        try:
+            return storage.child("images").child(email).child(
+                email).download("", book + "s")
+        except BaseException:
+            return ""
+    return ""

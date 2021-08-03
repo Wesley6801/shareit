@@ -4,11 +4,11 @@
 <head>
   <meta charset="utf-8">
     {% block title %} {% endblock %}
+    {% block header %} {% endblock %}
   <!-- bootstrap -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <!-- css stylesheet -->
   <link rel="stylesheet" href="static/home.css">
-  <link rel="stylesheet" href="static/user_profile.css">
   <link rel="stylesheet" href="static/share.css">
 
      <!-- font awesome -->
@@ -25,7 +25,7 @@
     <section id="site-header">
     <!-- NAV BAR -->
     <nav class="navbar navbar-expand-lg navbar navbar-dark bg-primary">
-      <a class="navbar-brand" href="#">Share-it</a>
+      <a class="navbar-brand" href="{{url_for('home')}}">Share-it</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -42,7 +42,7 @@
             </li>
 
             <li class="nav-item active">
-              <a class="nav-link" href="#">Add Book <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="{{url_for('share')}}">Share<span class="sr-only">(current)</span></a>
             </li>
 
             <li class="nav-item active">
@@ -55,9 +55,10 @@
                   <i class="fas fa-user"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left">
-                  <button class="dropdown-item" type="button">Profile</button>
+                  <a href="{{url_for('user_profile')}}"><button class="dropdown-item" type="button">Profile</button></a>
                   <button class="dropdown-item" type="button">My Books</button>
-                   <a class="nav-link" href="{{url_for('logout')}}"><button class="dropdown-item" type="button">Sign Out</button></a>                 
+                  <a href="/searchtest"><button class="dropdown-item" type="button">Booksrun Search</button></a>
+                  <a href="{{url_for('logout')}}"><button class="dropdown-item" type="button">Sign Out</button></a>                 
                 </div>
               </div>
             </li>
@@ -69,7 +70,7 @@
     <!-- END OF NAV BAR -->
         
     {% block content %} {% endblock %}
-    
+
 </body>
 
 </html>

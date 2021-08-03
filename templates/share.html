@@ -1,48 +1,42 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h3 class="sharebook-title">Share Book</h3>
-    <form class="share-form">
+  <h3 class="sharebook-title">Share Book</h3>
+<form class="share-form" enctype=multipart/form-data action="/share" method="POST">
   <div class="form-group">
     <label for="exampleInputEmail1">Title</label>
-    <input type="text" class="form-control" id="title" placeholder="Title">
+    <input type="text" class="form-control" id="title" placeholder="Title" name="title" required>
   </div>
   
   <div class="form-group">
     <label for="exampleInputEmail1">Author</label>
-    <input type="text" class="form-control" id="title"  placeholder="Author">
-  </div>
-  
-  <div class="form-group">
-    <label for="exampleInputEmail1">Title</label>
-    <input type="text" class="form-control" id="title" placeholder="Title">
+    <input type="text" class="form-control" id="author"  placeholder="Author" name="author" required>
   </div>
   
   <div class="form-group">
     <label for="exampleInputEmail1">ISBN</label>
-    <input type="text" class="form-control" id="title"  placeholder="Title">
+    <input type="text" class="form-control" id="isbn"  placeholder="Isbn" name="isbn" required>
   </div>
   
-  <div class="form-group">
-    <label for="exampleInputEmail1">Title</label>
-    <input type="text" class="form-control" id="title" placeholder="Title">
-  </div>
   
   <div class="form-group">
     <label for="exampleInputEmail1">Price</label>
-    <input type="number" class="form-control" id="Price" value="0" placeholder="Title">
+    <input type="number" class="form-control" id="Price" value="0" name="price" required>
+  </div>
+    Paperback? <input style="margin-left: 5px;" type="checkbox" class="form-check-input" value="1" name="is_paper_back"> 
+  
+ 
+  
+  <div class="form-group">
+    <label for="pdf">Upload Book (Only if you are the copyright holder)</label>
+    <input type="file" class="form-control-file" id="pdf" name="pdf">
   </div>
   
   <div class="form-group">
-    <label for="exampleFormControlFile1">Upload Book (optional)</label>
-    <input type="file" class="form-control-file" id="exampleFormControlFile1">
+       <label for="cover">Upload Book Image</label>
+       <input type="file" class="form-control-file" id="cover" name="cover">
   </div>
-  
-  <div class="form-group">
-    <label for="exampleFormControlFile1">Upload Book Image</label>
-    <input type="file" class="form-control-file" id="exampleFormControlFile1">
-  </div>
-  
-  <button type="submit" class="btn btn-primary">Share</button>
+   
+  <button type="submit" class="btn btn-primary" value="upload">Share</button>
 </form>
 {% endblock %}
