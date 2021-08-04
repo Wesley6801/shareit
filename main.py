@@ -140,7 +140,8 @@ def home():
             "home.html",
             digital_book_list=digital_book_list,
             paperback_list=paperback_list,
-            paid_book_list=paid_book_list)
+            paid_book_list=paid_book_list,
+            current_user_college=current_user_college)
     else:
         return render_template("login.html")
 
