@@ -425,7 +425,6 @@ def detail(isbn):
     current_user_email).get('college')
     current_user_token = session.get('user')['idToken']
     book = get_book_by_isbn(isbn, current_user_college)[0]
-    # title, author, isbn, price, is_paperback, shared_by, sharer_email, cover_link, pdf_link
     title = book.get('title')
     author = book.get('author')
     isbn = book.get('isbn')
@@ -437,6 +436,20 @@ def detail(isbn):
     pdf_link = get_pdf(isbn, current_user_token)
     book = BookDisplay(title, author, isbn, price, is_paperback, shared_by, sharer_email, cover_link, pdf_link)
     return render_template("book_details.html", book=book)
+
+
+
+
+@app.route("/read/<isbn>")
+def read(isbn):
+    current_user = session['user']
+    current_user_email = current_user.get('email')
+    current_user_college = get_user_by_email(
+    current_user_email).get('college')
+    current_user_token = session.get('user')['idToken']
+    pdf_link = get_pdf(isbn, current_user_token)
+    return render_template("read.html", pdf=pdf_link)
+
 
 
 

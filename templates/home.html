@@ -87,7 +87,7 @@
             <img class="book-cover-img" src="{{book.cover_link}}" alt="harry potter" />
             <h6 class="book-title">{{book.title}}</h6>
             <p class="book-author"><span class="by">By:</span>{{book.author}}</p>
-            <button type="button" class="btn btn-outline-primary btn-action">Read</button>
+            <a href="{{url_for('read', isbn=book.isbn)}}"><button type="button" class="btn btn-outline-primary btn-action">Read</button></a>
           </div>
         </div>
         {% endfor %}
