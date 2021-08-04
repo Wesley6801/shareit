@@ -118,7 +118,7 @@
              <h6 class="book-title">{{book.title}}</h6>
             <p class="book-author"><span class="by">By:</span> {{book.author}}</p>
             <p class="sharer"><span class="by">Shared by:</span> <a href="#">{{book.shared_by}}</a></p>
-            <button type="button" class="btn btn-outline-primary btn-action">More</button>
+            <a href="{{url_for('detail', isbn=book.isbn)}}"><button type="button" class="btn btn-outline-primary btn-action">More</button></a>
           </div>
         </div>
          {% endfor %} 

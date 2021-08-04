@@ -14,7 +14,7 @@
       <P>Price: free</P>
       <p>ISBN: {{book.isbn}}</p>
       <p>Shared By: <a href="#">{{book.shared_by}}</a></p>
-      <button type="button" class="btn btn-outline-primary btn-lg">Contact Owner</button>
+       <a href="mailto:{{book.sharer_email}}"><button type="button" class="btn btn-outline-primary btn-lg">Contact Owner</button></a>    
     </div>
     {% endfor %}  
   </div>

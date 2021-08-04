@@ -424,11 +424,19 @@ def detail(isbn):
     current_user_college = get_user_by_email(
     current_user_email).get('college')
     current_user_token = session.get('user')['idToken']
-    paid_books = get_paid_books(current_user_college)
-    for book in paid_books:
-        if book.isbn == isbn:
-            return render_template("book_details.html", book=book)
-    return render_template("home.html")
+    book = get_book_by_isbn(isbn, current_user_college)[0]
+    # title, author, isbn, price, is_paperback, shared_by, sharer_email, cover_link, pdf_link
+    title = book.get('title')
+    author = book.get('author')
+    isbn = book.get('isbn')
+    price = book.get('price')
+    is_paperback = book.get('is_paperback')
+    shared_by = book.get('shared_by')
+    sharer_email = book.get('sharer_email')
+    cover_link = get_cover(isbn, current_user_token)
+    pdf_link = get_pdf(isbn, current_user_token)
+    book = BookDisplay(title, author, isbn, price, is_paperback, shared_by, sharer_email, cover_link, pdf_link)
+    return render_template("book_details.html", book=book)
 
 
 
