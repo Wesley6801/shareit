@@ -486,12 +486,11 @@ def checkout():
 def charge():
     api_key = STRIPE_API_KEY
     token = request.form.get('stripeToken')
-    
 
     # todo: stripe stuff
     headers = {'Authorization': f'Bearer {api_key}'}
     data = {
-        'amount': 22500,
+        'amount': 1500,
         'currency': 'usd',
         'description': 'Another Charge',
         'source': token

@@ -11,7 +11,7 @@
                         <ul class="cart_list">
                             
                             <li class="cart_item clearfix">
-                                <div class="cart_item_image"><img src="static/images/harry.png" alt=""></div>
+                                <div class="cart_item_image"><img src="{{book.get('cover_link')}}" alt=""></div>
                                 <div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
                                     <div class="cart_item_name cart_info_col">
                                         <div class="cart_item_title">Title</div>
@@ -41,8 +41,14 @@
                         </div>
                     </div>
                     <div class="cart_buttons"> 
-                        <button type="button" class="button cart_button_clear">Continue Browsing</button> 
-                        <button type="button" class="button cart_button_checkout">Checkout</button> 
+                        <a href="url_for('home')">
+                          <button type="button" class="button cart_button_clear">Continue Browsing</button> 
+                        </a>
+                        
+                        <a href="url_for('checkout')">
+                          <button type="button" class="button cart_button_checkout">Checkout</button> 
+                        </a>
+                         
                     </div>
                 </div>
             </div>
