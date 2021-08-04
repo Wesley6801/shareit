@@ -220,6 +220,7 @@ def searchAPI():
                 request.form.get('ISBN')))
         ima = get_bookImage(request.form.get('ISBN'))
         if search[1] == "Error" and search[0] == "Error":
+            print("error")
             flash("The book is not in Booksrun.")
             return render_template("search.html", test="none")
         if ima == "Error no images for the book.":
@@ -435,7 +436,11 @@ def detail(isbn):
     cover_link = get_cover(isbn, current_user_token)
     pdf_link = get_pdf(isbn, current_user_token)
     book = BookDisplay(title, author, isbn, price, is_paperback, shared_by, sharer_email, cover_link, pdf_link)
-    return render_template("book_details.html", book=book)
+    if is_paperback:
+        d = "Paperback"
+    else:
+        d = "Digital"
+    return render_template("book_details.html", book=book, p_or_d=d)
 
 
 

@@ -4,7 +4,7 @@
   <div class="row">
      {% for book in paperback_list %} 
     <div class="col-lg-3 col-md-4 mt-3 ml-3 mb-3">
-      <img class="img-fluid" src="https://www.nicepng.com/png/detail/895-8959915_please-note-jk-rowling-harry-potter-book-cover.png" >
+      <img class="img-fluid" src="{{book.cover_link}}" >
     </div> 
     <div class="col-lg-6 col-md-4 mt-3 ml-3 mb-3">
       <h2>{{book.title}}</h2>
