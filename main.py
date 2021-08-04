@@ -84,7 +84,7 @@ def home():
         # PAPERBACK
         paperback_list = []
         index = 0
-        for book in digital_section:
+        for book in paperback_section:
             print(book)
             if index <= 6:
                 cover_link = get_cover(book.get('isbn'), current_user_token)
@@ -504,6 +504,119 @@ def charge():
     print(r.text)
     # todo: create a thank you page
     return 'Done'
+
+
+# Displays every digital books
+@app.route("/all_digital")
+def all_digital():
+    current_user = session['user']
+    current_user_email = current_user.get('email')
+    current_user_college = get_user_by_email(
+    current_user_email).get('college')
+    current_user_token = session.get('user')['idToken']
+
+    digital_section = get_digital_books(current_user_college)
+    paperback_section = get_physical_books(current_user_college)
+    paid_section = get_paid_books(current_user_college)
+
+    # DIGITAL
+    digital_book_list = []
+    for book in digital_section:
+        cover_link = get_cover(book.get('isbn'), current_user_token)
+        pdf_link = get_pdf(book.get('isbn'), current_user_token)
+        title = book.get('title')
+        author = book.get('author')
+        isbn = book.get('isbn')
+        price = book.get('price')
+        is_paperback = book.get('is_paperback')
+        shared_by = book.get('shared_by')
+        sharer_email = book.get('sharer_email')
+        bookDisplay = BookDisplay(
+            title,
+            author,
+            isbn,
+            price,
+            is_paperback,
+            shared_by,
+            sharer_email,
+            cover_link,
+            pdf_link)
+        digital_book_list.append(bookDisplay)
+    return render_template("all_digital.html", digital_book_list=digital_book_list)
+
+
+
+@app.route("/all_paperback")
+def all_paperback():
+    current_user = session['user']
+    current_user_email = current_user.get('email')
+    current_user_college = get_user_by_email(
+    current_user_email).get('college')
+    current_user_token = session.get('user')['idToken']
+    
+    paperback_section = get_physical_books(current_user_college)
+
+
+    paperback_list = []
+    for book in paperback_section:
+        cover_link = get_cover(book.get('isbn'), current_user_token)
+        pdf_link = get_pdf(book.get('isbn'), current_user_token)
+        title = book.get('title')
+        author = book.get('author')
+        isbn = book.get('isbn')
+        price = book.get('price')
+        is_paperback = book.get('is_paperback')
+        shared_by = book.get('shared_by')
+        sharer_email = book.get('sharer_email')
+        bookDisplay = BookDisplay(
+            title,
+            author,
+            isbn,
+            price,
+            is_paperback,
+            shared_by,
+            sharer_email,
+            cover_link,
+            pdf_link)
+        paperback_list.append(bookDisplay)    
+    return render_template("all_paperback.html", paperback_list=paperback_list)
+
+
+
+@app.route("/all_paid")
+def all_paid():
+    current_user = session['user']
+    current_user_email = current_user.get('email')
+    current_user_college = get_user_by_email(
+    current_user_email).get('college')
+    current_user_token = session.get('user')['idToken']
+    paid_section = get_paid_books(current_user_college)
+    paid_book_list = []
+    for book in paid_section:
+        cover_link = get_cover(book.get('isbn'), current_user_token)
+        pdf_link = get_pdf(book.get('isbn'), current_user_token)
+        title = book.get('title')
+        author = book.get('author')
+        isbn = book.get('isbn')
+        price = book.get('price')
+        is_paperback = book.get('is_paperback')
+        shared_by = book.get('shared_by')
+        sharer_email = book.get('sharer_email')
+        bookDisplay = BookDisplay(
+            title,
+            author,
+            isbn,
+            price,
+            is_paperback,
+            shared_by,
+            sharer_email,
+            cover_link,
+            pdf_link)
+        paid_book_list.append(bookDisplay)
+    return render_template("all_paid.html", paid_book_list=paid_book_list)
+
+
+
 
 
 if __name__ == '__main__':
