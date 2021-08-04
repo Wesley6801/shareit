@@ -68,7 +68,29 @@ def get_paid_books(college):
         book_list.append(book.to_dict())
         print(book.to_dict())
     return book_list
+
+
+def get_book_by_isbn(isbn, college):
+    db = firestore.client()
+    books = db.collection('books').document(college).collection('books').where("isbn", "==", isbn).get()
+    book_list = []
+    for book in books:
+        book_list.append(book.to_dict())
+    return book_list
+
+
+def add_item_to_cart(email, book):
+#     db.collection('books').document('UNO').collection("books").document('12345567')
+    db = firestore.client()
+    db.collection('carts').document(email).set(book)
     
+
+def get_item_from_cart(email):
+    db = firestore.client()
+    item = db.collection('carts').document(email).get()
+    return item.to_dict()
+
+
 
 def get_userBooks_list(sub, college, email):
     db = firestore.client()

@@ -77,4 +77,7 @@ from classes.classes import *
 # user = sign_in_user("jack@theman.com", "jack123")
 # print(user["idToken"])
 # print(get_cover_by_isbn("03989894564", user["idToken"]))
-# print(get_paid_books("CSI"))
+# print(type(get_paid_books("CSI")))
+# add_to_cart("jack@theman.com", {'email' : 'jack@theman.com', 'name' : 'Jackie', 'college' : 'UNO'})
+# print(get_item_from_cart('jack@theman.com'))
+print(get_book_by_isbn('2121121212', 'CSI'))

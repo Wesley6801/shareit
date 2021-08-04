@@ -21,10 +21,6 @@ class test_pages(unittest.TestCase):
     def test_register(self):
         response = self.app.get('/register', follow_redirects=True)
         self.assertEqual(response.status_code, 200)
-
-    def test_vaild_register(self):    
-        pass
-        
         
     def test_login(self):
         response = self.app.get('/login', follow_redirects=True)

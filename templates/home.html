@@ -8,17 +8,6 @@
 
 {% block content %}
 
-<div class="container">
-{% with messages = get_flashed_messages(with_categories=true) %}
-  {% if messages %}
-    {% for category, message in messages %}
-       <div class="alert alert-{{ category }}">
-             {{ message }}
-       </div>
-    {% endfor %}
-  {% endif %}
-{% endwith %}
-</div>
       <!-- CAROUSEL -->
     <div id="carousel1" class="carousel slide carousel-fade" data-ride="carousel" style="height:50vh">
       <!--Indicators-->
@@ -126,7 +115,7 @@
         <div class="col-lg-2 col-md-4">
           <div class="book-container">
             <img class="book-cover-img" src="static/images/harry.png" alt="harry potter" />
-            <h6 class="book-title">{{book.title}}</h6>
+             <h6 class="book-title">{{book.title}}</h6>
             <p class="book-author"><span class="by">By:</span> {{book.author}}</p>
             <p class="sharer"><span class="by">Shared by:</span> <a href="#">{{book.shared_by}}</a></p>
             <button type="button" class="btn btn-outline-primary btn-action">More</button>
@@ -158,8 +147,8 @@
             <img class="book-cover-img" src="static/images/harry.png" alt="harry potter" />
             <h6 class="book-title">{{book.title}}</h6>
             <p class="book-author"><span class="by">By:</span> {{book.author}} </p>
-            <p class="book-price">${{book.price}}</p>
-            <button type="button" class="btn btn-outline-primary btn-action">Buy</button>
+            <p class="book-price">{{book.price}}</p>
+             <a href="{{url_for('buy', isbn=book.isbn)}}"><button type="button" class="btn btn-outline-primary btn-action">Buy</button></a>
           </div>
         </div>
         {% endfor %}

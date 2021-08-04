@@ -9,12 +9,13 @@
                     <div class="cart_title">Shopping Cart</div>
                     <div class="cart_items">
                         <ul class="cart_list">
+                            
                             <li class="cart_item clearfix">
                                 <div class="cart_item_image"><img src="static/images/harry.png" alt=""></div>
                                 <div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
                                     <div class="cart_item_name cart_info_col">
                                         <div class="cart_item_title">Title</div>
-                                        <div class="cart_item_text">Harry Potter</div>
+                                        <div class="cart_item_text">{{book.get('title')}}</div>
                                     </div>
                                     
                                     <div class="cart_item_quantity cart_info_col">
@@ -23,13 +24,14 @@
                                     </div>
                                     <div class="cart_item_price cart_info_col">
                                         <div class="cart_item_title">Price</div>
-                                        <div class="cart_item_text">$19.99</div>
+                                        <div class="cart_item_text">${{book.get('price')}}</div>
                                     </div>
                                     <div class="cart_item_total cart_info_col">
                                         <button type="button" class="btn btn-danger">Remove</button>
                                     </div>
                                 </div>
                             </li>
+                            
                         </ul>
                     </div>
                     <div class="order_total">
@@ -38,7 +40,10 @@
                             <div class="order_total_amount">$19.99</div>
                         </div>
                     </div>
-                    <div class="cart_buttons"> <button type="button" class="button cart_button_clear">Continue Shopping</button> <button type="button" class="button cart_button_checkout">Add to Cart</button> </div>
+                    <div class="cart_buttons"> 
+                        <button type="button" class="button cart_button_clear">Continue Browsing</button> 
+                        <button type="button" class="button cart_button_checkout">Checkout</button> 
+                    </div>
                 </div>
             </div>
         </div>

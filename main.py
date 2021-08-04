@@ -46,7 +46,7 @@ def home():
         current_user = session['user']
         current_user_email = current_user.get('email')
         current_user_college = get_user_by_email(
-            current_user_email).get('college')
+        current_user_email).get('college')
         current_user_token = session.get('user')['idToken']
 
         digital_section = get_digital_books(current_user_college)
@@ -83,7 +83,9 @@ def home():
 
         # PAPERBACK
         paperback_list = []
+        index = 0
         for book in digital_section:
+            print(book)
             if index <= 6:
                 cover_link = get_cover(book.get('isbn'), current_user_token)
                 pdf_link = get_pdf(book.get('isbn'), current_user_token)
@@ -109,6 +111,7 @@ def home():
 
         # PAID
         paid_book_list = []
+        index = 0
         for book in paid_section:
             if index <= 6:
                 cover_link = get_cover(book.get('isbn'), current_user_token)
@@ -202,7 +205,8 @@ def login():
 @app.route("/logout")
 def logout():
     session.pop("user", None)
-    session.pop("token", None)
+    session.pop("cart", None)
+    flash("Logged out.")
     return redirect(url_for("login"))
 
 
@@ -215,6 +219,9 @@ def searchAPI():
             get_bookPrices_json(
                 request.form.get('ISBN')))
         ima = get_bookImage(request.form.get('ISBN'))
+        if search[1] == "Error" and search[0] == "Error":
+            flash("The book is not in Booksrun.")
+            return render_template("search.html", test="none")
         if ima == "Error no images for the book.":
             return render_template(
                 "search.html",
@@ -338,6 +345,7 @@ def share():
                 upload_pdf_to_storage("static/pdfs/" +
                                       secure_filename(
                                           pdf.filename), isbn)
+        flash("The Book Was Shared")
 
     return render_template("share.html")
 
@@ -373,33 +381,112 @@ def myBooks():
         my_books.append(bookDisplay)
     return render_template("mybooks.html", my_books=my_books)
 
-@app.route("/buy")
-def buy():
-    return render_template("checkout_page.html")
 
 
-@app.route("/detail")
-def detail():
-    return render_template("book_details.html")
+@app.route("/buy/<isbn>")
+def buy(isbn):
+    current_user = session['user']
+    current_user_email = current_user.get('email')
+    current_user_college = get_user_by_email(
+    current_user_email).get('college')
+    current_user_token = session.get('user')['idToken']
+    paid_books = get_paid_books(current_user_college)
+    for book in paid_books:
+        if book.get('isbn') == isbn:
+            cover_link = get_cover(book.get('isbn'), current_user_token)
+            pdf_link = get_pdf(book.get('isbn'), current_user_token)
+            title = book.get('title')
+            author = book.get('author')
+            isbn = book.get('isbn')
+            price = book.get('price')
+            is_paperback = book.get('is_paperback')
+            shared_by = book.get('shared_by')
+            sharer_email = book.get('sharer_email')
+            book = BookDisplay(
+                title,
+                author,
+                isbn,
+                price,
+                is_paperback,
+                shared_by,
+                sharer_email, 
+                cover_link,
+                pdf_link) 
+        return render_template("checkout_page.html", book=book)
+    return render_template("home.html")
+
+
+
+@app.route("/detail/<isbn>")
+def detail(isbn):
+    current_user = session['user']
+    current_user_email = current_user.get('email')
+    current_user_college = get_user_by_email(
+    current_user_email).get('college')
+    current_user_token = session.get('user')['idToken']
+    paid_books = get_paid_books(current_user_college)
+    for book in paid_books:
+        if book.isbn == isbn:
+            return render_template("book_details.html", book=book)
+    return render_template("home.html")
+
 
 
 @app.route("/cart")
 def cart():
-    return render_template("cart.html")
+    current_user = session['user']
+    current_user_email = current_user.get('email')
+    book = get_item_from_cart(current_user_email)
+    return render_template("cart.html", book=book)
+
+
+
+@app.route("/add_to_cart/<isbn>")
+def add_to_cart(isbn):
+    current_user = session['user']
+    current_user_email = current_user.get('email')
+    current_user_college = get_user_by_email(
+    current_user_email).get('college')
+    current_user_token = session.get('user')['idToken']
+    books = get_paid_books(current_user_college)
+    paid_book_list = []
+    index = 0
+    for book in books:
+        if book.get('isbn') == isbn:
+            cover_link = get_cover(book.get('isbn'), current_user_token)
+            pdf_link = get_pdf(book.get('isbn'), current_user_token)
+            title = book.get('title')
+            author = book.get('author')
+            isbn = book.get('isbn')
+            price = book.get('price')
+            is_paperback = book.get('is_paperback')
+            shared_by = book.get('shared_by')
+            sharer_email = book.get('sharer_email')
+            bookDisplay = BookDisplay(
+                title,
+                author,
+                isbn,
+                price,
+                is_paperback,
+                shared_by,
+                sharer_email,
+                cover_link,
+                pdf_link)
+            add_item_to_cart(current_user_email, bookDisplay.__dict__)
+    return redirect(url_for("home"))
 
 
 '''STRIPE STUFF'''
-
-
-@ app.route('/checkout')
+@app.route('/checkout')
 def checkout():
     return render_template('checkout.html')
+    
 
-
-@ app.route('/charge', methods=['POST', 'GET'])
+@app.route('/charge', methods=['POST', 'GET'])
 def charge():
     api_key = STRIPE_API_KEY
     token = request.form.get('stripeToken')
+    
 
     # todo: stripe stuff
     headers = {'Authorization': f'Bearer {api_key}'}
