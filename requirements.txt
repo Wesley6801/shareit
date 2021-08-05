@@ -10,7 +10,6 @@ email_validator==1.1.3
 flask_behind_proxy==0.1.1
 datetime
 wtforms
-urllib
 firebase_admin
 unittest
 requests
