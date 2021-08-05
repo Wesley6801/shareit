@@ -7,3 +7,15 @@
     text-align: center;
     margin: 10px 100px;
 }
+
+h2, p, h3, h6{
+    font-family: "Montserrat";
+}
+
+
+h1 {
+  font-family: "Montserrat";
+  font-weight: 900;
+  font-size: 3.5rem;
+  line-height: 1.5;
+}

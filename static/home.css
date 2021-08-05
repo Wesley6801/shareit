@@ -5,6 +5,26 @@
   bottom: 10px;
 }
 
+
+h2, p, h3, h6{
+    font-family: "Montserrat";
+}
+
+.navbar-brand {
+  font-family: "Ubuntu";
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+h1{
+  font-family: "Montserrat";
+  font-weight: 900;
+  font-size: 3.5rem;
+  line-height: 1.5;
+}
+
+
+
 .section-title-container{
   width: 100%;
   text-align: center;

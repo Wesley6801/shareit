@@ -6,6 +6,19 @@
     text-shadow: rgba(0, 0, 0, .01) 0 0 1px
 }
 
+h2, p, h3, h6{
+    font-family: "Montserrat";
+}
+
+
+h1 {
+  font-family: "Montserrat";
+  font-weight: 900;
+  font-size: 3.5rem;
+  line-height: 1.5;
+}
+
+
 body {
     font-family: 'Rubik', sans-serif;
     font-size: 14px;

@@ -1,13 +1,7 @@
 {% extends "base.html" %}
-
-
-{% block header %}
-    
-{% endblock %}
-
+{% block title %}Home{% endblock %}
 
 {% block content %}
-
       <!-- CAROUSEL -->
     <div id="carousel1" class="carousel slide carousel-fade" data-ride="carousel" style="height:50vh">
       <!--Indicators-->
@@ -21,31 +15,31 @@
       <div class="carousel-inner" role="listbox">
         <div class="carousel-item active">
           <div class="view">
-            <img src="https://www.w3schools.com/bootstrap/la.jpg" alt="New york" alt="First slide">
+            <img src="/static/images/library.jpg" alt="New york" alt="First slide">
             <div class="mask rgba-black-light"></div>
           </div>
           <div class="carousel-caption">
-            <h2 class="h3-responsive">Help the Needy</h2>
+            <h1 class="h3-responsive">Help fellow students</h1>
           </div>
         </div>
         <div class="carousel-item">
           <!--Mask color-->
           <div class="view">
-            <img src="https://www.w3schools.com/bootstrap/la.jpg" alt="New york" alt="Second slide">
+            <img src="/static/images/meet.jpg" alt="New york" alt="Second slide">
             <div class="mask rgba-black-strong"></div>
           </div>
           <div class="carousel-caption">
-            <h2 class="h3-responsive">Meet New People</h2>
+            <h1 class="h3-responsive">Meet new people</h1>
           </div>
         </div>
         <div class="carousel-item">
           <!--Mask color-->
           <div class="view">
-            <img src="https://www.w3schools.com/bootstrap/la.jpg" alt="New york" alt="Third slide">
+            <img src="/static/images/contribute.jpg" alt="New york" alt="Third slide">
             <div class="mask rgba-black-slight"></div>
           </div>
           <div class="carousel-caption">
-            <h2 class="h3-responsive">Contibute</h2>
+            <h1 class="h3-responsive">Be charitable</h1>
           </div>
         </div>
       </div>
@@ -65,7 +59,7 @@
 
 
  <div class="section-title-container">
-    <h3 class="section-title">Shared Digital Books:</h3>
+    <h3 class="section-title">Digital Books:</h3>
     <a href="{{url_for('all_digital')}}">
       <p class="view-all-digital">view all</p>
     </a>
@@ -84,7 +78,7 @@
        {% for book in digital_book_list %}  
         <div class="col-lg-2 col-md-4">
           <div class="book-container">
-            <img class="book-cover-img" src="{{book.cover_link}}" alt="harry potter" />
+            <img class="book-cover-img img-fluid" src="{{book.cover_link}}" alt="harry potter" />
             <h6 class="book-title">{{book.title}}</h6>
             <p class="book-author"><span class="by">By:</span>{{book.author}}</p>
             <a href="{{url_for('read', isbn=book.isbn)}}"><button type="button" class="btn btn-outline-primary btn-action">Read</button></a>
@@ -101,7 +95,7 @@
 
   <hr>
   <div class="section-title-container">
-    <h3 class="section-title">Shared Pysical Books:</h3>
+    <h3 class="section-title">Paperback:</h3>
     <a href="{{url_for('all_paperback')}}">
       <p class="view-all-paper-back">view all</p>
     </a>
@@ -114,16 +108,16 @@
         {% for book in paperback_list %}
         <div class="col-lg-2 col-md-4">
           <div class="book-container">
-            <img class="book-cover-img" src="{{book.cover_link}}" alt="harry potter" />
+            <img class="book-cover-img img-fluid" src="{{book.cover_link}}" alt="harry potter" />
              <h6 class="book-title">{{book.title}}</h6>
             <p class="book-author"><span class="by">By:</span> {{book.author}}</p>
-            <p class="sharer"><span class="by">Shared by:</span> <a href="#" type="button" data-toggle="modal" data-target="#modalprofile"  >{{book.shared_by}}</a></p>
+            <p class="sharer"><span class="by">Shared by:</span> <a href="#" type="button" data-toggle="modal" data-target="#{{book.shared_by}}"  >{{book.shared_by}}</a></p>
             <a href="{{url_for('detail', isbn=book.isbn)}}"><button type="button" class="btn btn-outline-primary btn-action">More</button></a>
           </div>
         </div>
           
 <!--           MODAL -->
-  <div class="modal fade" id="modalprofile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="{{book.shared_by}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
     <!--Content-->
     <div class="modal-content text-center">
@@ -137,7 +131,7 @@
         <div class="container-fluid" style="text-align:left;">
       <div class="row">
         <div class="col-lg-4">
-         <img class="img-fluid" src="static/images/lady-img.jpg" >
+         <img class="img-fluid img-fluid" src="{{urls[book.shared_by]}}" >
         </div>
       <div class="col-lg-8">
         <p><i class="fas fa-user"></i>  {{book.shared_by}}</p> 
@@ -182,10 +176,10 @@
         {% for book in paid_book_list %}
         <div class="col-lg-2 col-md-4">
           <div class="book-container">
-            <img class="book-cover-img" src="{{book.cover_link}}" alt="harry potter" />
+            <img class="book-cover-img img-fluid" src="{{book.cover_link}}" alt="harry potter" />
             <h6 class="book-title">{{book.title}}</h6>
             <p class="book-author"><span class="by">By:</span> {{book.author}} </p>
-            <p class="book-price">${{book.price}}</p>
+            <p class="book-price" style="color:red;">${{book.price}}</p>
              <a href="{{url_for('buy', isbn=book.isbn)}}"><button type="button" class="btn btn-outline-primary btn-action">Buy</button></a>
           </div>
         </div>

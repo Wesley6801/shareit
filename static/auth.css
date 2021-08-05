@@ -2,6 +2,19 @@
   min-height: 100vh;
 }
 
+h2, p, h3, h6{
+    font-family: "Montserrat";
+}
+
+
+h1 {
+  font-family: "Montserrat";
+  font-weight: 900;
+  font-size: 3.5rem;
+  line-height: 1.5;
+}
+
+
 .bg-image {
   background-image: url('https://source.unsplash.com/WEQbe2jBg40/600x1200');
   background-size: cover;

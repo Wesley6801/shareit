@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Not found{%endblock%}
+{% block header %} 
+{{super()}}
+
+<style>
+ .bg-img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;   
+  width: 50%;
+}
+</style>
+
+{% endblock %}
+
+{% block content %}
+<div class="page-wrap d-flex flex-row align-items-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12 text-center">
+                <span class="display-1 d-block">404</span>
+                <div class="mb-4 lead">Hmm...we couldn't find that book.</div>
+                <a href="{{url_for('home')}}" class="btn btn-link">Back to Home</a>
+            </div>
+        </div>
+        <img class="bg-img" src="/static/images/not-found.jpg">
+    </div>
+</div>
+{% endblock %}

@@ -1,21 +1,48 @@
 {% extends "base.html" %}
+{% block title %}Chekout Page{% endblock %}
 {% block content %}
  <div class="container-fluid item-container">
   <div class="row">
-    <div class="book-container">
-       <img class="book-img" src="{{book.cover_link}}" width="217" height="280">>
+    <div class="col-lg-3 col-md-6 mt-3">
+       <img class="img-fluid" src="{{selected_book.cover_link}}" >
     </div>
-    <div class="col-lg-8 col-md-6">
-      <h1 class="book-title">{{book.title}}</h1>
-      <p class="author">By: {{book.author}}</p>
-      <p class="price"> <i class="fas fa-tags"></i>  ${{book.price}}</p>
+    <div class="col-lg-8 col-md-6 mt-3">
+      <h1 class="book-title">{{selected_book.title}}</h1>
+      <p class="author">By: {{selected_book.author}}</p>
+      <p class="price"> <i class="fas fa-tags"></i>  ${{selected_book.price}}</p>
+      <p class="compare_with"> <i class="fas fa-hand-holding-usd"></i> <span style="color:red;">   Booksrun Value:</span> {{pr}}</p>
       <p class="synopsis">Synopsis:</p>
       <p class="synopsis-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-      <p>{{book.isbn}}</p>
-      <a href="/add_to_cart/{{book.isbn}}"><button type="button"  class="btn btn-primary bouton"> <i class="fas fa-shopping-cart"></i> Add to cart</button></a>  
+      <p>{{selected_book.isbn}}</p>
+      <a href="/add_to_cart/{{selected_book.isbn}}"><button type="button"  class="btn btn-primary bouton"> <i class="fas fa-shopping-cart"></i> Add to cart</button></a>  
       <a href="{{url_for('checkout')}}"><button type="button" class="btn btn-primary bouton">Buy</button></a>  
-      <p>Seller: <a href="#">{{book.shared_by}}</a></p>   
+      <p style="margin-top: 10px;"><i class="fas fa-user"></i> <a href="#">{{selected_book.shared_by}}</a></p>   
     </div>
   </div>
+  
+   <hr style="width:100%;text-align:left;margin-left:0">
+                
+     <h3 style="margin-left: 30px;">Others:</h3> 
+         <div class="container testimonial-group">
+          <div class="row text-center">
+          {% for other in paid_book_list %}
+           <div class="col-4">
+            <div class="col-sm mb-1">
+            <div class="card" style="width: 15rem;">
+              <img class="img-thumbnail" src="{{other.cover_link}}" alt="Card image cap">
+              <div class="card-body">
+
+                <h6 class="card-title">{{other.title}}</h6>
+                 <p class="book-author"><span class="by">By:</span> {{other.author}}</p>
+                 <p class="sharer"><span class="by">Shared by:</span> <a href="#" type="button" data-toggle="modal" data-target="#{{other.shared_by}}">{{other.shared_by}}</a></p>
+                  <a href="{{url_for('detail', isbn=book.isbn)}}"><button type="button" class="btn btn-outline-primary btn-action">More</button></a>
+              </div>
+            </div>
+            </div>
+             </div>
+            {% endfor %}
+            </div>
+            </div>  
+     
 </div>
 {% endblock %}

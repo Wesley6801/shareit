@@ -1,4 +1,14 @@
 {% extends "base.html" %}
+{% block header %}
+{{super()}}
+<script>
+function myFunction() { 
+	document.getElementById("cart-item").style.display="none"; 
+    document.getElementById("price").setText("0");
+}
+</script>
+
+{% endblock %}
 
 {% block content %}
 <div class="cart_section">
@@ -10,7 +20,7 @@
                     <div class="cart_items">
                         <ul class="cart_list">
                             
-                            <li class="cart_item clearfix">
+                            <li class="cart_item clearfix" id="cart-item">
                                 <div class="cart_item_image"><img src="{{book.get('cover_link')}}" alt=""></div>
                                 <div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
                                     <div class="cart_item_name cart_info_col">
@@ -27,7 +37,7 @@
                                         <div class="cart_item_text">${{book.get('price')}}</div>
                                     </div>
                                     <div class="cart_item_total cart_info_col">
-                                        <button type="button" class="btn btn-danger">Remove</button>
+                                        <button type="button" onclick="myFunction()" class="btn btn-danger remove-button">Remove</button>
                                     </div>
                                 </div>
                             </li>
@@ -37,7 +47,7 @@
                     <div class="order_total">
                         <div class="order_total_content text-md-right">
                             <div class="order_total_title">Order Total:</div>
-                            <div class="order_total_amount">$19.99</div>
+                            <div id="price" class="order_total_amount">${{book.get('price')}}</div>
                         </div>
                     </div>
                     <div class="cart_buttons"> 
@@ -45,7 +55,7 @@
                           <button type="button" class="button cart_button_clear">Continue Browsing</button> 
                         </a>
                         
-                        <a href="url_for('checkout')">
+                        <a href="{{url_for('checkout')}}">
                           <button type="button" class="button cart_button_checkout">Checkout</button> 
                         </a>
                          

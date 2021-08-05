@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="jumbotron text-center">
+  <h1 class="display-3">Thank You!</h1>
+  <p class="lead"><strong>Please check your email for the book.</strong></p>
+  <p>Proceeds will be donated to <a href="https://schoolonwheels.org/" target="_blank">school on wheels</a> </p>
+  <hr>
+  <p>
+    Having trouble? <a href="mailto: finaleproject668@gmail.com">Contact us</a>
+  </p>
+  <p class="lead">
+    <a class="btn btn-primary btn-sm" href="{{url_for('home')}}" role="button">Continue to homepage</a>
+  </p>
+</div>
+{% endblock %}

@@ -1,78 +1,203 @@
 <!DOCTYPE html>
-<html>
+<html> {% block header %}
 
 <head>
-  <meta charset="utf-8">
-    {% block title %} {% endblock %}
-    {% block header %} {% endblock %}
-  <!-- bootstrap -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <!-- css stylesheet -->
-  <link rel="stylesheet" href="static/home.css">
-  <link rel="stylesheet" href="static/share.css">
-  <link rel="stylesheet" href="static/checkout_page.css">
-  <link rel="stylesheet" href="static/cart.css">
-
-     <!-- font awesome -->
-  <script src="https://kit.fontawesome.com/9f27eeb44e.js" crossorigin="anonymous"></script>
-
-
-  <!-- bootstrap scripts -->
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-</head>
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock %}</title>
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- css stylesheet -->
+    <link rel="stylesheet" href="static/home.css">
+    <link rel="stylesheet" href="static/share.css">
+    <link rel="stylesheet" href="static/checkout_page.css">
+    <link rel="stylesheet" href="static/cart.css">
+    <link rel="stylesheet" href="static/horizontal.css">
+    
+    <!--google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;900&family=Ubuntu:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <!-- font awesome -->
+    <script src="https://kit.fontawesome.com/9f27eeb44e.js" crossorigin="anonymous"></script>
+    <!-- bootstrap scripts -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</head> {% endblock %}
 
 <body>
     <section id="site-header">
-    <!-- NAV BAR -->
-    <nav class="navbar navbar-expand-lg navbar navbar-dark bg-primary">
-      <a class="navbar-brand" href="{{url_for('home')}}">Share-it</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <ul class="navbar-nav ml-auto">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-
-            <li>
-              <form class="form-inline my-2 my-lg-0 search-bar">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-primary my-2 my-sm-0 search-bar-button" type="submit">Search</button>
-              </form>
-            </li>
-
-            <li class="nav-item active">
-              <a class="nav-link" href="{{url_for('share')}}">Share<span class="sr-only">(current)</span></a>
-            </li>
-
-            <li class="nav-item active">
-              <a class="nav-link" href="{{url_for('cart')}}">Cart <span class="sr-only">(current)</span></a>
-            </li>
-
-            <li class="nav-item dropdown">
-              <div class="btn-group">
-                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
-                  <i class="fas fa-user"></i>
-                </button>
-                <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left">
-                  <a href="{{url_for('user_profile')}}"><button class="dropdown-item" type="button">Profile</button></a>
-                    <a href="/mybooks"><button class="dropdown-item" type="button">My Books</button></a>
-                  <a href="/searchtest"><button class="dropdown-item" type="button">Booksrun Search</button></a>
-                  <a href="{{url_for('logout')}}"><button class="dropdown-item" type="button">Sign Out</button></a>                 
+        <!-- NAV BAR -->
+        <nav class="navbar navbar-expand-lg navbar navbar-dark bg-primary">
+            <a class="navbar-brand" href="{{url_for('home')}}">Share-it</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <ul class="navbar-nav ml-auto">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li>
+                            <form class="form-inline my-2 my-lg-0 search-bar" action="/search_db" method="POST">
+                                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
+                                <button class="btn btn-outline-primary my-2 my-sm-0 search-bar-button" type="submit">Search</button>
+                            </form>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{url_for('share')}}">Share<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{url_for('cart')}}">Cart <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-user"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left">
+                                    <a href="{{url_for('user_profile')}}"><button class="dropdown-item" type="button">Profile</button></a>
+                                    <a href="/mybooks"><button class="dropdown-item" type="button">My Books</button></a>
+                                    <a href="/searchtest"><button class="dropdown-item" type="button">Booksrun Search</button></a>
+                                    <a href="{{url_for('logout')}}"><button class="dropdown-item" type="button">Sign Out</button></a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
-              </div>
-            </li>
-
-          </ul>
-        </div>
-      </ul>
-    </nav>
-    <!-- END OF NAV BAR -->
-        
-    {% block content %} {% endblock %}
-
+            </ul>
+        </nav>
+        <!-- END OF NAV BAR --> {% block content %} {% endblock %}
 </body>
 
+<!-- Footer -->
+<footer style="background-color:#0275d8;" class="text-center text-lg-start bg-light text-muted">
+  <!-- Section: Social media -->
+  <section
+    class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom"
+  >
+    <!-- Left -->
+    <div class="me-5 d-none d-lg-block">
+      <span>Get connected with us on social networks:</span>
+    </div>
+    <!-- Left -->
+
+    <!-- Right -->
+    <div>
+      <a href="" class="me-4 text-reset">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="" class="me-4 text-reset">
+        <i class="fab fa-twitter"></i>
+      </a>
+      <a href="" class="me-4 text-reset">
+        <i class="fab fa-google"></i>
+      </a>
+      <a href="" class="me-4 text-reset">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="" class="me-4 text-reset">
+        <i class="fab fa-linkedin"></i>
+      </a>
+      <a href="" class="me-4 text-reset">
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <!-- Right -->
+  </section>
+  <!-- Section: Social media -->
+
+  <!-- Section: Links  -->
+  <section class="">
+    <div class="container text-center text-md-start mt-5">
+      <!-- Grid row -->
+      <div class="row mt-3">
+        <!-- Grid column -->
+        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+          <!-- Content -->
+          <h6 class="text-uppercase fw-bold mb-4">
+            <i class="fas fa-gem me-3"></i> Share-it
+              
+          </h6>
+          <p>
+            We believe that technology is the closest thing we have to magic and when
+            you have supper powers, why not do good? Last year due to the pandemic, millions
+            of students skipped buying textbooks because they barely had enough money to buy
+            food. Our mission is to change that.
+          </p>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+          <!-- Links -->
+          <h6 class="text-uppercase fw-bold mb-4">
+            Products
+          </h6>
+          <p>
+            <a href="#!" class="text-reset">All books</a>
+          </p>
+          <p>
+            <a href="#!" class="text-reset">Paid books</a>
+          </p>
+          <p>
+            <a href="#!" class="text-reset">Digital books</a>
+          </p>
+          <p>
+            <a href="#!" class="text-reset">Paperback books</a>
+          </p>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+          <!-- Links -->
+          <h6 class="text-uppercase fw-bold mb-4">
+            Useful links
+          </h6>
+          <p>
+            <a href="#!" class="text-reset">Pricing</a>
+          </p>
+          <p>
+            <a href="#!" class="text-reset">Settings</a>
+          </p>
+          <p>
+            <a href="#!" class="text-reset">Orders</a>
+          </p>
+          <p>
+            <a href="#!" class="text-reset">Help</a>
+          </p>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+          <!-- Links -->
+          <h6 class="text-uppercase fw-bold mb-4">
+            Contact
+          </h6>
+          <p><i class="fas fa-home me-3"></i> New York, NY 10012, US</p>
+          <p>
+            <i class="fas fa-envelope me-3"></i>
+            shareit@shareit.com
+          </p>
+          <p><i class="fas fa-phone me-3"></i> + 718 555 8888</p>
+          <p><i class="fas fa-print me-3"></i> + 718 555 8888</p>
+        </div>
+        <!-- Grid column -->
+      </div>
+      <!-- Grid row -->
+    </div>
+  </section>
+  <!-- Section: Links  -->
+
+  <!-- Copyright -->
+  <div class="text-center p-4" style="background-color:#0275d8;">
+     <p style="color:white;">©shareit 2021 Copyright:</p> 
+    <a style="color:white;" class="text-reset fw-bold" href="https://mdbootstrap.com/">shareit.com</a>
+  </div>
+  <!-- Copyright -->
+</footer>
+<!-- Footer -->    
+    
+    
 </html>

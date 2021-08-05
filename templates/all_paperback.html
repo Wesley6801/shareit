@@ -11,11 +11,47 @@
       <p>By: {{book.author}}</p>
       <p>Synopsis: </p>
       <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-      <P>Price: free</P>
+      <P>Price: ${{book.price}}</P>
       <p>ISBN: {{book.isbn}}</p>
-      <p>Shared By: <a href="#">{{book.shared_by}}</a></p>
+       <p class="sharer"><span class="by">Shared by:</span> <a href="#" type="button" data-toggle="modal" data-target="#{{book.shared_by}}"  >{{book.shared_by}}</a></p>
        <a href="mailto:{{book.sharer_email}}"><button type="button" class="btn btn-outline-primary btn-lg">Contact Owner</button></a>    
     </div>
+          
+<!--           MODAL -->
+  <div class="modal fade" id="{{book.shared_by}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+    <!--Content-->
+    <div class="modal-content text-center">
+      <!--Header-->
+      <div class="modal-header d-flex justify-content-center">
+        <p class="heading">User Profile</p>
+      </div>
+
+      <!--Body-->
+      <div class="modal-body">
+        <div class="container-fluid" style="text-align:left;">
+      <div class="row">
+        <div class="col-lg-4">
+         <img class="img-fluid" src="{{urls[book.shared_by]}}" >
+        </div>
+      <div class="col-lg-8">
+        <p><i class="fas fa-user"></i>  {{book.shared_by}}</p> 
+        <p><i class="fas fa-university"></i>  {{college}}</p>
+      </div>
+    </div>
+     </div>
+    </div>
+
+      <!--Footer-->
+      <div class="modal-footer flex-center">
+        <a href="mailto: {{book.sharer_email}}" class="btn  btn-outline-primary">Contact</a>
+      </div>
+    </div>
+    <!--/.Content-->
+  </div>
+</div>
+          
+<!--           END MODAL -->
     {% endfor %}  
   </div>
   <hr>

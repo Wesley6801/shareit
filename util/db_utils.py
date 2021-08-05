@@ -91,6 +91,16 @@ def get_item_from_cart(email):
     return item.to_dict()
 
 
+# search book
+def search(title, college):
+    db = firestore.client()
+    books = db.collection('books').document(college).collection('books').where("title", "==", title).get()
+    book_list = []
+    for book in books:
+        book_list.append(book.to_dict())
+    return book_list
+
+
 
 def get_userBooks_list(sub, college, email):
     db = firestore.client()

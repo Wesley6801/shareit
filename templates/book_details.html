@@ -1,11 +1,12 @@
 {% extends "base.html" %}
+{% block title %} Detail {% endblock %}
 {% block content %}
   <div class="container-fluid item-container">
   <div class="row">
-    <div class="col-lg-3 col-md-6">
-      <img class="book-img" src="{{book.cover_link}}" width="325" height="420">
+    <div class="col-lg-3 col-md-6 mt-3 mb-3">
+      <img class="img-fluid" src="{{book.cover_link}}" width="400" height="533">
     </div>
-    <div class="col-lg-8 col-md-6">
+    <div class="col-lg-8 col-md-6 mt-3 mb-3">
       <h1 class="book-title">{{book.title}}</h1>
       <p class="author">By: {{book.author}}</p>
       <p class="price"> <i class="fas fa-tags"></i>  free</p>
@@ -17,4 +18,31 @@
     </div>
   </div>
 </div>
+
+<hr style="width:100%;text-align:left;margin-left:0">
+                
+     <h3 style="margin-left: 30px;">Others:</h3> 
+         <div class="container testimonial-group">
+          <div class="row text-center">
+          {% for other in paperback_list %}
+           <div class="col-4">
+            <div class="col-sm mb-1">
+            <div class="card" style="width: 15rem;">
+              <img class="img-thumbnail" src="{{other.cover_link}}" alt="Card image cap">
+              <div class="card-body">
+
+                <h6 class="card-title">{{other.title}}</h6>
+                 <p class="book-author"><span class="by">By:</span> {{other.author}}</p>
+                 <p class="sharer"><span class="by">Shared by:</span> <a href="#" type="button" data-toggle="modal" data-target="#{{other.shared_by}}">{{other.shared_by}}</a></p>
+                  <a href="{{url_for('detail', isbn=book.isbn)}}"><button type="button" class="btn btn-outline-primary btn-action">More</button></a>
+              </div>
+            </div>
+            </div>
+             </div>
+            {% endfor %}
+            </div>
+            </div>
+
+           
+
 {% endblock %}

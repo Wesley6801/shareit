@@ -46,7 +46,7 @@ def home():
         current_user = session['user']
         current_user_email = current_user.get('email')
         current_user_college = get_user_by_email(
-        current_user_email).get('college')
+            current_user_email).get('college')
         current_user_token = session.get('user')['idToken']
 
         digital_section = get_digital_books(current_user_college)
@@ -57,7 +57,7 @@ def home():
         digital_book_list = []
         index = 0
         for book in digital_section:
-            #we only want to disply 6 items on main page
+            # we only want to disply 6 items on main page
             if index <= 6:
                 cover_link = get_cover(book.get('isbn'), current_user_token)
                 pdf_link = get_pdf(book.get('isbn'), current_user_token)
@@ -79,10 +79,11 @@ def home():
                     cover_link,
                     pdf_link)
                 digital_book_list.append(bookDisplay)
-            index = index+1
+            index = index + 1
 
         # PAPERBACK
         paperback_list = []
+        share_url = {}
         index = 0
         for book in paperback_section:
             print(book)
@@ -96,6 +97,8 @@ def home():
                 is_paperback = book.get('is_paperback')
                 shared_by = book.get('shared_by')
                 sharer_email = book.get('sharer_email')
+                url = get_user_profile_url(
+                    sharer_email, session['user'].get("idtoken"))
                 bookDisplay = BookDisplay(
                     title,
                     author,
@@ -107,7 +110,8 @@ def home():
                     cover_link,
                     pdf_link)
                 paperback_list.append(bookDisplay)
-            index = index+1
+                share_url[shared_by] = url
+            index = index + 1
 
         # PAID
         paid_book_list = []
@@ -134,14 +138,15 @@ def home():
                     cover_link,
                     pdf_link)
                 paid_book_list.append(bookDisplay)
-            index = index+1
+            index = index + 1
         print(len(digital_book_list))
         return render_template(
             "home.html",
             digital_book_list=digital_book_list,
             paperback_list=paperback_list,
             paid_book_list=paid_book_list,
-            current_user_college=current_user_college)
+            current_user_college=current_user_college,
+            urls=share_url)
     else:
         return render_template("login.html")
 
@@ -201,6 +206,48 @@ def login():
             flash(unsuccessful)
             return render_template("login.html", unsuccessful=unsuccessful)
     return render_template("login.html")
+
+
+@app.route("/search_db", methods=['GET', 'POST'])
+def search_db():
+    if request.method == "POST":
+        current_user = session['user']
+        current_user_email = current_user.get('email')
+        current_user_college = get_user_by_email(
+            current_user_email).get('college')
+        current_user_token = session.get('user')['idToken']
+        query = request.form.get("search")
+        try:
+            book = search(query, current_user_college)[0]
+            title = book.get('title')
+            author = book.get('author')
+            isbn = book.get('isbn')
+            price = book.get('price')
+            is_paperback = book.get('is_paperback')
+            shared_by = book.get('shared_by')
+            sharer_email = book.get('sharer_email')
+            cover_link = get_cover(isbn, current_user_token)
+            pdf_link = get_pdf(isbn, current_user_token)
+            book = BookDisplay(
+                title,
+                author,
+                isbn,
+                price,
+                is_paperback,
+                shared_by,
+                sharer_email,
+                cover_link,
+                pdf_link)
+            if is_paperback:
+                d = "Paperback"
+            else:
+                d = "Digital"
+            return render_template(
+                "search_db.html",
+                book=book,
+                is_paperback=is_paperback,p_or_d=d)
+        except BaseException:
+            return render_template("book_not_found.html")
 
 
 @app.route("/logout")
@@ -361,7 +408,9 @@ def myBooks():
         return redirect("/home")
     my_books = []
     for book in ub:
-        cover_link = get_cover(book.get('isbn'), session['user'].get('idToken'))
+        cover_link = get_cover(
+            book.get('isbn'),
+            session['user'].get('idToken'))
         pdf_link = get_pdf(book.get('isbn'), session['user'].get('idToken'))
         title = book.get('title')
         author = book.get('author')
@@ -384,7 +433,6 @@ def myBooks():
     return render_template("mybooks.html", my_books=my_books)
 
 
-
 @app.route("/buy/<isbn>")
 def buy(isbn):
     current_user = session['user']
@@ -404,19 +452,50 @@ def buy(isbn):
             is_paperback = book.get('is_paperback')
             shared_by = book.get('shared_by')
             sharer_email = book.get('sharer_email')
-            book = BookDisplay(
+            json = get_bookPrices_json(isbn)
+            pr = ""
+            if json["price_used"] != "No used textbooks.":
+                pr += "Used retail price: $" + str(json['price_used']) + " "
+            if json['price_new'] != "No new textbooks.":
+                pr += "New retail price: $" + str(json['price_new'])
+            selected_book = BookDisplay(
                 title,
                 author,
                 isbn,
                 price,
                 is_paperback,
                 shared_by,
-                sharer_email, 
+                sharer_email,
                 cover_link,
-                pdf_link) 
-        return render_template("checkout_page.html", book=book)
+                pdf_link)
+        
+        
+        paid_book_list = []
+        for book in paid_books:
+            if book.get('isbn') != isbn:
+                cover_link = get_cover(book.get('isbn'), current_user_token)
+                pdf_link = get_pdf(book.get('isbn'), current_user_token)
+                title = book.get('title')
+                author = book.get('author')
+                isbn = book.get('isbn')
+                price = book.get('price')
+                is_paperback = book.get('is_paperback')
+                shared_by = book.get('shared_by')
+                sharer_email = book.get('sharer_email')
+                bookDisplay = BookDisplay(
+                    title,
+                    author,
+                    isbn,
+                    price,
+                    is_paperback,
+                    shared_by,
+                    sharer_email,
+                    cover_link,
+                    pdf_link)
+                paid_book_list.append(bookDisplay)
+        return render_template("checkout_page.html", selected_book=selected_book, pr=pr, paid_book_list=paid_book_list)
+    
     return render_template("home.html")
-
 
 
 @app.route("/detail/<isbn>")
@@ -424,7 +503,7 @@ def detail(isbn):
     current_user = session['user']
     current_user_email = current_user.get('email')
     current_user_college = get_user_by_email(
-    current_user_email).get('college')
+        current_user_email).get('college')
     current_user_token = session.get('user')['idToken']
     book = get_book_by_isbn(isbn, current_user_college)[0]
     title = book.get('title')
@@ -436,14 +515,54 @@ def detail(isbn):
     sharer_email = book.get('sharer_email')
     cover_link = get_cover(isbn, current_user_token)
     pdf_link = get_pdf(isbn, current_user_token)
-    book = BookDisplay(title, author, isbn, price, is_paperback, shared_by, sharer_email, cover_link, pdf_link)
+    selected_book = BookDisplay(
+        title,
+        author,
+        isbn,
+        price,
+        is_paperback,
+        shared_by,
+        sharer_email,
+        cover_link,
+        pdf_link)
     if is_paperback:
         d = "Paperback"
     else:
         d = "Digital"
-    return render_template("book_details.html", book=book, p_or_d=d)
-
-
+        
+        
+    #Other books
+    other_books = get_physical_books(current_user_college)
+    paperback_list = []
+    share_url = {}
+    index = 0
+    for book in other_books:
+        if book.get('isbn') != isbn:
+            cover_link = get_cover(book.get('isbn'), current_user_token)
+            pdf_link = get_pdf(book.get('isbn'), current_user_token)
+            title = book.get('title')
+            author = book.get('author')
+            isbn = book.get('isbn')
+            price = book.get('price')
+            is_paperback = book.get('is_paperback')
+            shared_by = book.get('shared_by')
+            sharer_email = book.get('sharer_email')
+            url = get_user_profile_url(
+                sharer_email, session['user'].get("idtoken"))
+            otherbook = BookDisplay(
+                title,
+                author,
+                isbn,
+                price,
+                is_paperback,
+                shared_by,
+                sharer_email,
+                cover_link,
+                pdf_link)
+            paperback_list.append(otherbook)
+            share_url[shared_by] = url        
+    
+    return render_template("book_details.html", book=selected_book, p_or_d=d, paperback_list=paperback_list)
 
 
 @app.route("/read/<isbn>")
@@ -451,12 +570,10 @@ def read(isbn):
     current_user = session['user']
     current_user_email = current_user.get('email')
     current_user_college = get_user_by_email(
-    current_user_email).get('college')
+        current_user_email).get('college')
     current_user_token = session.get('user')['idToken']
     pdf_link = get_pdf(isbn, current_user_token)
     return render_template("read.html", pdf=pdf_link)
-
-
 
 
 @app.route("/cart")
@@ -467,13 +584,12 @@ def cart():
     return render_template("cart.html", book=book)
 
 
-
 @app.route("/add_to_cart/<isbn>")
 def add_to_cart(isbn):
     current_user = session['user']
     current_user_email = current_user.get('email')
     current_user_college = get_user_by_email(
-    current_user_email).get('college')
+        current_user_email).get('college')
     current_user_token = session.get('user')['idToken']
     books = get_paid_books(current_user_college)
     paid_book_list = []
@@ -504,10 +620,12 @@ def add_to_cart(isbn):
 
 
 '''STRIPE STUFF'''
+
+
 @app.route('/checkout')
 def checkout():
     return render_template('checkout.html')
-    
+
 
 @app.route('/charge', methods=['POST', 'GET'])
 def charge():
@@ -530,7 +648,7 @@ def charge():
 
     print(r.text)
     # todo: create a thank you page
-    return 'Done'
+    return render_template("thanks.html")
 
 
 # Displays every digital books
@@ -539,15 +657,14 @@ def all_digital():
     current_user = session['user']
     current_user_email = current_user.get('email')
     current_user_college = get_user_by_email(
-    current_user_email).get('college')
+        current_user_email).get('college')
     current_user_token = session.get('user')['idToken']
 
     digital_section = get_digital_books(current_user_college)
-    paperback_section = get_physical_books(current_user_college)
-    paid_section = get_paid_books(current_user_college)
 
     # DIGITAL
     digital_book_list = []
+    share_url = {}
     for book in digital_section:
         cover_link = get_cover(book.get('isbn'), current_user_token)
         pdf_link = get_pdf(book.get('isbn'), current_user_token)
@@ -558,6 +675,9 @@ def all_digital():
         is_paperback = book.get('is_paperback')
         shared_by = book.get('shared_by')
         sharer_email = book.get('sharer_email')
+        url = get_user_profile_url(
+            sharer_email, session['user'].get("idtoken"))
+        print(sharer_email+"\n"+url)
         bookDisplay = BookDisplay(
             title,
             author,
@@ -569,8 +689,12 @@ def all_digital():
             cover_link,
             pdf_link)
         digital_book_list.append(bookDisplay)
-    return render_template("all_digital.html", digital_book_list=digital_book_list)
-
+        share_url[shared_by] = url
+    return render_template(
+        "all_digital.html",
+        digital_book_list=digital_book_list,
+        urls=share_url,
+        college=current_user_college)
 
 
 @app.route("/all_paperback")
@@ -578,13 +702,13 @@ def all_paperback():
     current_user = session['user']
     current_user_email = current_user.get('email')
     current_user_college = get_user_by_email(
-    current_user_email).get('college')
+        current_user_email).get('college')
     current_user_token = session.get('user')['idToken']
-    
+
     paperback_section = get_physical_books(current_user_college)
 
-
     paperback_list = []
+    share_url = {}
     for book in paperback_section:
         cover_link = get_cover(book.get('isbn'), current_user_token)
         pdf_link = get_pdf(book.get('isbn'), current_user_token)
@@ -595,6 +719,8 @@ def all_paperback():
         is_paperback = book.get('is_paperback')
         shared_by = book.get('shared_by')
         sharer_email = book.get('sharer_email')
+        url = get_user_profile_url(
+            sharer_email, session['user'].get("idtoken"))
         bookDisplay = BookDisplay(
             title,
             author,
@@ -605,9 +731,10 @@ def all_paperback():
             sharer_email,
             cover_link,
             pdf_link)
-        paperback_list.append(bookDisplay)    
-    return render_template("all_paperback.html", paperback_list=paperback_list)
-
+        paperback_list.append(bookDisplay)
+        share_url[shared_by] = url
+    return render_template("all_paperback.html", paperback_list=paperback_list,
+                           urls=share_url, college=current_user_college)
 
 
 @app.route("/all_paid")
@@ -615,10 +742,11 @@ def all_paid():
     current_user = session['user']
     current_user_email = current_user.get('email')
     current_user_college = get_user_by_email(
-    current_user_email).get('college')
+        current_user_email).get('college')
     current_user_token = session.get('user')['idToken']
     paid_section = get_paid_books(current_user_college)
     paid_book_list = []
+    share_url = {}
     for book in paid_section:
         cover_link = get_cover(book.get('isbn'), current_user_token)
         pdf_link = get_pdf(book.get('isbn'), current_user_token)
@@ -629,6 +757,8 @@ def all_paid():
         is_paperback = book.get('is_paperback')
         shared_by = book.get('shared_by')
         sharer_email = book.get('sharer_email')
+        url = get_user_profile_url(
+            sharer_email, session['user'].get("idtoken"))
         bookDisplay = BookDisplay(
             title,
             author,
@@ -640,11 +770,11 @@ def all_paid():
             cover_link,
             pdf_link)
         paid_book_list.append(bookDisplay)
-    return render_template("all_paid.html", paid_book_list=paid_book_list)
+        share_url[shared_by] = url
+    return render_template("all_paid.html", paid_book_list=paid_book_list, urls=share_url, college=current_user_college)
 
-
-
-
+def sendPDF_Email(isbn):
+    pass
 
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0")
