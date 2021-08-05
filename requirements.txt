@@ -11,5 +11,4 @@ flask_behind_proxy==0.1.1
 datetime
 wtforms
 firebase_admin
-unittest
 requests
