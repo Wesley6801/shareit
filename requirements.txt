@@ -12,7 +12,6 @@ datetime
 os
 wtforms
 urllib.request
-os.path
 firebase_admin
 unittest
 requests
