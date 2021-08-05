@@ -64,7 +64,6 @@ from classes.classes import *
 # except BaseException as err:
 #     print(err)
 # print(type(get_user_from_db("jack@theman.com")))
-# update_user_info(email="jack@theman.com",value={'email' : 'jack@theman.com', 'name' : 'Jackie', 'college' : 'UNO'})
 # print(get_user_by_email("jack@theman.com"))
 # update = {
 #             'email': 'jack@theman.com',
@@ -78,7 +77,6 @@ from classes.classes import *
 # print(user["idToken"])
 # print(get_cover_by_isbn("03989894564", user["idToken"]))
 # print(type(get_paid_books("CSI")))
-# add_to_cart("jack@theman.com", {'email' : 'jack@theman.com', 'name' : 'Jackie', 'college' : 'UNO'})
 # print(get_item_from_cart('jack@theman.com'))
 # print(get_book_by_isbn('2121121212', 'CSI'))
 print(search('Fifi Prindacier', 'CSI'))
