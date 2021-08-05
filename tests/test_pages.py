@@ -1,4 +1,3 @@
-from main import *
 import unittest
 import firebase_admin
 import pyrebase
@@ -7,7 +6,7 @@ import sys
 import os
 
 sys.path.append('../shareit')
-
+from main import *
 
 class test_pages(unittest.TestCase):
 
