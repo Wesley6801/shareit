@@ -12,3 +12,4 @@ datetime
 wtforms
 firebase_admin
 requests
+pyrebase

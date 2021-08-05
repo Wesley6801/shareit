@@ -641,7 +641,7 @@ def charge():
     # todo: stripe stuff
     headers = {'Authorization': f'Bearer {api_key}'}
     data = {
-        'amount': 1500,
+        'amount': 1000,
         'currency': 'usd',
         'description': 'Another Charge',
         'source': token
