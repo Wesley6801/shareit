@@ -86,7 +86,6 @@ def home():
         share_url = {}
         index = 0
         for book in paperback_section:
-            print(book)
             if index <= 6:
                 cover_link = get_cover(book.get('isbn'), current_user_token)
                 pdf_link = get_pdf(book.get('isbn'), current_user_token)
@@ -139,7 +138,6 @@ def home():
                     pdf_link)
                 paid_book_list.append(bookDisplay)
             index = index + 1
-        print(len(digital_book_list))
         return render_template(
             "home.html",
             digital_book_list=digital_book_list,
@@ -261,14 +259,12 @@ def logout():
 @app.route("/searchtest", methods=['GET', 'POST'])
 def searchAPI():
     if request.method == "POST":
-        print(request.form)
         search = get_bookPrices(
             request.form.get('Bookname'),
             get_bookPrices_json(
                 request.form.get('ISBN')))
         ima = get_bookImage(request.form.get('ISBN'))
         if search[1] == "Error" and search[0] == "Error":
-            print("error")
             flash("The book is not in Booksrun.")
             return render_template("search.html", test="none")
         if ima == "Error no images for the book.":
@@ -279,7 +275,6 @@ def searchAPI():
                 test="none",
                 text2=ima,
                 url=search[1])
-        print(ima)
         return render_template(
             "search.html",
             text=search[0],
@@ -441,6 +436,8 @@ def buy(isbn):
         current_user_email).get('college')
     current_user_token = session.get('user')['idToken']
     paid_books = get_paid_books(current_user_college)
+    print(len(paid_books))
+    pr = ""
     for book in paid_books:
         if book.get('isbn') == isbn:
             cover_link = get_cover(book.get('isbn'), current_user_token)
@@ -453,12 +450,15 @@ def buy(isbn):
             shared_by = book.get('shared_by')
             sharer_email = book.get('sharer_email')
             json = get_bookPrices_json(isbn)
-            pr = ""
-            if json["price_used"] != "No used textbooks.":
+            used = json["price_used"] != "No used textbooks."
+            new = json["price_new"] != "No new textbooks."
+            if used:
                 pr += "Used retail price: $" + str(json['price_used']) + " "
-            if json['price_new'] != "No new textbooks.":
+            if new:
                 pr += "New retail price: $" + str(json['price_new'])
-            selected_book = BookDisplay(
+            if not used and not new:
+                pr = "No price available in booksrun."
+            book = BookDisplay(
                 title,
                 author,
                 isbn,
@@ -468,19 +468,17 @@ def buy(isbn):
                 sharer_email,
                 cover_link,
                 pdf_link)
-
-        paid_book_list = []
-        for book in paid_books:
-            if book.get('isbn') != isbn:
-                cover_link = get_cover(book.get('isbn'), current_user_token)
-                pdf_link = get_pdf(book.get('isbn'), current_user_token)
-                title = book.get('title')
-                author = book.get('author')
-                isbn = book.get('isbn')
-                price = book.get('price')
-                is_paperback = book.get('is_paperback')
-                shared_by = book.get('shared_by')
-                sharer_email = book.get('sharer_email')
+            paid_book_list = []
+            for book1 in paid_books:
+                cover_link = get_cover(book1.get('isbn'), current_user_token)
+                pdf_link = get_pdf(book1.get('isbn'), current_user_token)
+                title = book1.get('title')
+                author = book1.get('author')
+                isbn = book1.get('isbn')
+                price = book1.get('price')
+                is_paperback = book1.get('is_paperback')
+                shared_by = book1.get('shared_by')
+                sharer_email = book1.get('sharer_email')
                 bookDisplay = BookDisplay(
                     title,
                     author,
@@ -492,11 +490,11 @@ def buy(isbn):
                     cover_link,
                     pdf_link)
                 paid_book_list.append(bookDisplay)
-        return render_template(
-            "checkout_page.html",
-            selected_book=selected_book,
-            pr=pr,
-            paid_book_list=paid_book_list)
+            return render_template(
+                "checkout_page.html",
+                selected_book=book,
+                pri=pr,
+                paid_book_list=paid_book_list)
 
     return render_template("home.html")
 
@@ -683,7 +681,6 @@ def all_digital():
         sharer_email = book.get('sharer_email')
         url = get_user_profile_url(
             sharer_email, session['user'].get("idtoken"))
-        print(sharer_email + "\n" + url)
         bookDisplay = BookDisplay(
             title,
             author,

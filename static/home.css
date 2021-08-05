@@ -6,6 +6,16 @@
 }
 
 
+.cover-img{
+  display: block;
+  max-width:350px;
+  max-height:250px;
+  width: auto;
+  height: auto
+}
+
+
+
 h2, p, h3, h6{
     font-family: "Montserrat";
 }

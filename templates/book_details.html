@@ -1,48 +1,108 @@
 {% extends "base.html" %}
 {% block title %} Detail {% endblock %}
-{% block content %}
-  <div class="container-fluid item-container">
-  <div class="row">
-    <div class="col-lg-3 col-md-6 mt-3 mb-3">
-      <img class="img-fluid" src="{{book.cover_link}}" width="400" height="533">
-    </div>
-    <div class="col-lg-8 col-md-6 mt-3 mb-3">
-      <h1 class="book-title">{{book.title}}</h1>
-      <p class="author">By: {{book.author}}</p>
-      <p class="price"> <i class="fas fa-tags"></i>  free</p>
-      <p class="book-type"><i class="fas fa-book"></i>  Type: {{p_or_d}}</p>
-      <p class="synopsis">Synopsis:</p>
-      <p class="synopsis-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-      <p>IBSN: {{book.isbn}}</p>
-      <a href="mailto:{{book.sharer_email}}"><button type="button"  class="btn btn-primary bouton"> <i class="fas fa-envelope"></i> Contact Owner</button></a>  
-    </div>
-  </div>
-</div>
+{% block content %} 
 
-<hr style="width:100%;text-align:left;margin-left:0">
-                
-     <h3 style="margin-left: 30px;">Others:</h3> 
-         <div class="container testimonial-group">
-          <div class="row text-center">
-          {% for other in paperback_list %}
-           <div class="col-4">
-            <div class="col-sm mb-1">
-            <div class="card" style="width: 15rem;">
-              <img class="img-thumbnail" src="{{other.cover_link}}" alt="Card image cap">
-              <div class="card-body">
+{% block header %}
+{{super()}}
 
-                <h6 class="card-title">{{other.title}}</h6>
-                 <p class="book-author"><span class="by">By:</span> {{other.author}}</p>
-                 <p class="sharer"><span class="by">Shared by:</span> <a href="#" type="button" data-toggle="modal" data-target="#{{other.shared_by}}">{{other.shared_by}}</a></p>
-                  <a href="{{url_for('detail', isbn=book.isbn)}}"><button type="button" class="btn btn-outline-primary btn-action">More</button></a>
-              </div>
-            </div>
-            </div>
-             </div>
-            {% endfor %}
-            </div>
-            </div>
+<style>
+h2, p, h3, h6{
+    font-family: "Montserrat";
+}
 
-           
+
+h1 {
+  font-family: "Montserrat";
+  font-weight: 900;
+  font-size: 3.5rem;
+  line-height: 1.5;
+}
+
+
+.testimonial-group > .row {
+  display: block;
+  overflow-x: auto;
+  white-space: nowrap;
+  width: 100%;
+}
+.testimonial-group > .row > .col-4 {
+  display: inline-block;
+}
+
+/* Decorations */
+.col-4 { color: #000; font-size: 15px; padding-bottom: 20px; padding-top: 18px;}
+.col-4:nth-child(3n+1)
+.col-4:nth-child(3n+2)
+.col-4:nth-child(3n+3)
+
+.card {
+  overflow: hidden;
+}
+.card-block {
+  word-wrap: break-word;
+}
+
+.card-title{
+  padding: 0;
+  margin: 1px;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.book-author{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}    
+    
+    
+.synopsis, .ibsn{
+     font-weight: bold;       
+ }
+    
+</style>
 
 {% endblock %}
+
+<div class="container-fluid item-container">
+    <div class="row">
+        <div class="col-lg-3 col-md-6 mt-3 mb-3">
+            <img class="img-fluid" src="{{book.cover_link}}" width="400" height="533">
+        </div>
+        <div class="col-lg-8 col-md-6 mt-3 mb-3">
+            <h1 class="book-title">{{book.title}}</h1>
+            <p class="author">By: {{book.author}}</p>
+            <p class="price"> <i class="fas fa-tags"></i> ${{book.price}}</p>
+            <p class="book-type"><i class="fas fa-book"></i> Type: {{p_or_d}}</p>
+            <p class="synopsis">Synopsis:</p>
+            <p class="synopsis-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+            <p><span class="ibsn">IBSN:</span> {{book.isbn}}</p>
+            <a href="mailto:{{book.sharer_email}}"><button type="button" class="btn btn-primary bouton"> <i class="fas fa-envelope"></i> Contact Owner</button></a>
+        </div>
+    </div>
+</div>
+<hr style="width:100%;text-align:left;margin-left:0">
+<h3 style="margin-left: 30px;">Others:</h3>
+
+<div class="container testimonial-group">
+    <div class="row text-center">
+        {% for other in paperback_list %} 
+        <div class="col-4">
+            <div class="col-sm mb-1">
+                <div class="card" style="width: 15rem;">
+                    <img class="img-thumbnail" src="{{other.cover_link}}" alt="Card image cap">
+                    <div class="card-body">
+                        <h6 class="card-title">{{other.title}}</h6>
+                        <p class="book-author"><span class="by">By:</span> {{other.author}}</p>
+                        <p class="sharer"><span class="by">Shared by:</span> <a href="#" type="button" data-toggle="modal" data-target="#{{other.shared_by}}">{{other.shared_by}}</a></p>
+                        <a href="{{url_for('detail', isbn=other.isbn)}}"><button type="button" class="btn btn-outline-primary btn-action">More</button></a>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    {% endfor %}
+    </div>
+</div> {% endblock %}
