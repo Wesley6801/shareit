@@ -15,10 +15,9 @@ from datetime import timedelta
 from werkzeug.utils import secure_filename
 import os
 app = Flask(__name__)
+stripe = open("apiKeys.txt", "r").readlines()[1]
 app.config['SECRET_KEY'] = '766ad3b9779f8e26642e74331dbf694c'
-STRIPE_API_KEY = 'sk_test_51JIwIkGPV72h4LJb4DzDOGcEvk5e' +\
-                 'gzo5Uu330ulsWD9VCK9oXc9cuoQ1Dt' +\
-                 'TaefvMoiAzJtqKys4uPyEyKxQwu7Bv00vDmhzAoU'
+STRIPE_API_KEY = stripe[(stripe.index(":") + 1):].replace("\n", "")
 # make sessions last longer - 5 days in this case
 app.permanent_session_lifetime = timedelta(days=5)
 uploads = os.path.join(
@@ -636,7 +635,6 @@ def charge():
     api_key = STRIPE_API_KEY
     token = request.form.get('stripeToken')
 
-    # todo: stripe stuff
     headers = {'Authorization': f'Bearer {api_key}'}
     data = {
         'amount': 1000,

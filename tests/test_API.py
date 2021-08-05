@@ -7,7 +7,6 @@ test_isbn = 9781284140996
 response_correct = booksrunAPI.get_bookPrices_json(test_isbn)
 response_incorrect = booksrunAPI.get_bookPrices_json("wrong")
 
-
 class TestPages(unittest.TestCase):
 
     def test_json(self):
