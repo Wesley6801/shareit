@@ -1,4 +1,18 @@
 {% extends "base.html" %}
+{% block title %}
+  My books
+{% endblock %}
+
+{% block header %}
+{{super()}}
+
+<style>
+    .isbn, .by{
+       font-weight: bold;
+    }
+</style>
+
+{% endblock %}
 {% block content %}
 
 {% for book in my_books %}  
@@ -8,10 +22,10 @@
       <img class="book-img" src="{{book.cover_link}}">
     </div>
     <div class="col-lg-8 col-md-6">
-      <h1 class="book-title">{{book.title}}</h1>
-      <p class="author">By: {{book.author}}</p>
+      <h1 class="mybook-title" style="font-size: 2.5rem;" >{{book.title}}</h1>
+       <p class="author"> <span class="by">By:</span> {{book.author}}</p> 
       <p class="price"> <i class="fas fa-tags"></i>  ${{book.price}}</p>
-      <p>IBSN: {{book.isbn}} </p>
+      <p> <span class="isbn">ISBN:</span> {{book.isbn}} </p>
     </div>
   </div>
 </div>

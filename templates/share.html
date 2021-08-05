@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block title %}
+    Share
+{% endblock %}
+
 {% block content %}
   <h3 class="sharebook-title">Share Book</h3>
 <form class="share-form" enctype=multipart/form-data action="/share" method="POST">
