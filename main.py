@@ -245,7 +245,7 @@ def search_db():
             return render_template(
                 "search_db.html",
                 book=book,
-                is_paperback=is_paperback,p_or_d=d)
+                is_paperback=is_paperback, p_or_d=d)
         except BaseException:
             return render_template("book_not_found.html")
 
@@ -438,7 +438,7 @@ def buy(isbn):
     current_user = session['user']
     current_user_email = current_user.get('email')
     current_user_college = get_user_by_email(
-    current_user_email).get('college')
+        current_user_email).get('college')
     current_user_token = session.get('user')['idToken']
     paid_books = get_paid_books(current_user_college)
     for book in paid_books:
@@ -468,8 +468,7 @@ def buy(isbn):
                 sharer_email,
                 cover_link,
                 pdf_link)
-        
-        
+
         paid_book_list = []
         for book in paid_books:
             if book.get('isbn') != isbn:
@@ -493,8 +492,12 @@ def buy(isbn):
                     cover_link,
                     pdf_link)
                 paid_book_list.append(bookDisplay)
-        return render_template("checkout_page.html", selected_book=selected_book, pr=pr, paid_book_list=paid_book_list)
-    
+        return render_template(
+            "checkout_page.html",
+            selected_book=selected_book,
+            pr=pr,
+            paid_book_list=paid_book_list)
+
     return render_template("home.html")
 
 
@@ -529,9 +532,8 @@ def detail(isbn):
         d = "Paperback"
     else:
         d = "Digital"
-        
-        
-    #Other books
+
+    # Other books
     other_books = get_physical_books(current_user_college)
     paperback_list = []
     share_url = {}
@@ -560,9 +562,13 @@ def detail(isbn):
                 cover_link,
                 pdf_link)
             paperback_list.append(otherbook)
-            share_url[shared_by] = url        
-    
-    return render_template("book_details.html", book=selected_book, p_or_d=d, paperback_list=paperback_list)
+            share_url[shared_by] = url
+
+    return render_template(
+        "book_details.html",
+        book=selected_book,
+        p_or_d=d,
+        paperback_list=paperback_list)
 
 
 @app.route("/read/<isbn>")
@@ -677,7 +683,7 @@ def all_digital():
         sharer_email = book.get('sharer_email')
         url = get_user_profile_url(
             sharer_email, session['user'].get("idtoken"))
-        print(sharer_email+"\n"+url)
+        print(sharer_email + "\n" + url)
         bookDisplay = BookDisplay(
             title,
             author,
@@ -771,10 +777,16 @@ def all_paid():
             pdf_link)
         paid_book_list.append(bookDisplay)
         share_url[shared_by] = url
-    return render_template("all_paid.html", paid_book_list=paid_book_list, urls=share_url, college=current_user_college)
+    return render_template(
+        "all_paid.html",
+        paid_book_list=paid_book_list,
+        urls=share_url,
+        college=current_user_college)
+
 
 def sendPDF_Email(isbn):
     pass
+
 
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0")

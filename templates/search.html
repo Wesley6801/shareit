@@ -1,21 +1,29 @@
 {% extends "base.html" %} 
 {% block title %} Search {% endblock %}
 {% block content %}
-    <form action="/searchtest" method="POST">
+
+<form action="/searchtest" method="POST">
     <form class="form-inline">
-        <div class="form-group mx-sm-3 mb-2">
-            <h4>If you can't find a book here. Here is a simple search that will search the website Booksrun.</h4>
+        
+    <div class="form-row"></div>
+      <div class="col-md-6 mb-3">
+        <h4>Search</h4>
             <label for="ISBN">ISBN</label>
             <input type="text" class="form-control" id="ISBN" aria-describedby="ISBN" placeholder="Enter ISBN" name="ISBN" style="width:70%; " required>
-        </div>
-        <div class="form-group mx-sm-3 mb-2">
-            <label for="Booktitle">Book Title</label>
+     </div>
+
+    <div class="col-md-6 mb-3">
+       <label for="Booktitle">Book Title</label>
             <input type="text" class="form-control" id="Bookname" aria-describedby="Bookname" placeholder="Enter BookTitle" name="Bookname" style="width:70%; " required>
-        </div>
-        <div class="mx-sm-3 mb2">
-            <button type="submit" class="btn btn-primary" >Submit</button>
-        </div>
+       </div>
+
+    <button class="btn btn-primary" type="submit">
+      Search
+    </button>
     </form>
+</form>
+ 
+
 
     <style>
         img {

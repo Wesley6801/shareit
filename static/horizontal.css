@@ -1,0 +1,35 @@
+h2, p, h3, h6{
+    font-family: "Montserrat";
+}
+
+
+h1 {
+  font-family: "Montserrat";
+  font-weight: 900;
+  font-size: 3.5rem;
+  line-height: 1.5;
+}
+
+
+.testimonial-group > .row {
+  display: block;
+  overflow-x: auto;
+  white-space: nowrap;
+  width: 100%;
+}
+.testimonial-group > .row > .col-4 {
+  display: inline-block;
+}
+
+/* Decorations */
+.col-4 { color: #000; font-size: 15px; padding-bottom: 20px; padding-top: 18px;}
+.col-4:nth-child(3n+1)
+.col-4:nth-child(3n+2)
+.col-4:nth-child(3n+3)
+
+.card {
+  overflow: hidden;
+}
+.card-block {
+  word-wrap: break-word;
+}

@@ -8,7 +8,7 @@ Werkzeug==2.0.1
 Flask-WTF==0.15.1
 email_validator==1.1.3
 flask_behind_proxy==0.1.1
-datatime
+datetime
 os
 wtforms
 urllib.request
