@@ -1,11 +1,12 @@
 import requests
-key = open("apiKeys.txt","r").readlines()[0]
+key = open("apiKeys.txt", "r").readlines()[0]
 
-apiKey = str(key[key.index("?"):]).replace("\n","")
+apiKey = str(key[key.index("?"):]).replace("\n", "")
 baseBuyURL = "https://booksrun.com/api/v3/price/buy/"
 baseGoURL = 'https://www.googleapis.com/books/v1/volumes?q=isbn:'
 
 isbn = 9781284140996
+
 
 def get_bookPrices_json(isbn):
     if not isinstance(isbn, str) and not int:
@@ -34,6 +35,7 @@ def get_bookPrices_json(isbn):
     return "Error"
 # of a textbook. Also the url to redirect to the Booksrun website to
 # purchase.of
+
 
 def get_bookPrices(bookname, json):
     if not isinstance(json, dict):
